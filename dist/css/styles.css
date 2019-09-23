@@ -1,0 +1,45 @@
+body {
+	font-family: "Nunito Sans", sans-serif;
+	background: #fff;
+}
+
+#header {
+	height: 400px;
+	background-image: url("../images/header-bg.jpg");
+	background-color: #fff;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;	
+}
+
+#header #logo img {
+	width: 300px;
+}
+
+#options {
+	background-color: #f3f3f3;
+	height: 60px;
+}
+
+#filters span {
+	display: inline-flex;
+    vertical-align: middle;
+}
+
+#add-rest button {
+	border: none;
+	display: inline-flex;
+    vertical-align: middle;
+}
+
+#body-section {
+	height: 500px;
+}
+
+#map img {
+	width: 100%;
+}	
+
+#list {
+	height: auto;
+}
