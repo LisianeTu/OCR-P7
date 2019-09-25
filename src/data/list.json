@@ -1,0 +1,82 @@
+[
+	{
+		"restaurantName": "Bronco",
+		"address": "39 Rue des Petites Écuries, 75010 Paris",
+		"lat": 48.8737815,
+		"long": 2.3501649,
+		"ratings": [
+			{
+				"stars": 4,
+				"comment": "Un excellent restaurant, j'y reviendrai ! Par contre il vaut mieux aimer la viande."
+			},
+			{
+				"stars": 5,
+				"comment": "Tout simplement mon restaurant préféré !"
+			}
+		]
+	},
+	{
+		"restaurantName": "Babalou",
+		"address": "4 Rue Lamarck, 75018 Paris",
+		"lat": 48.8865035,
+		"long": 2.3442197,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Une minuscule pizzeria délicieuse cachée juste à côté du Sacré choeur !"
+			},
+			{
+				"stars": 3,
+				"comment": "J'ai trouvé ça correct, sans plus"
+			}
+		]
+	},
+	{
+		"restaurantName": "Le Gabriel",
+		"address": "42 Avenue Gabriel, 75008 Paris",
+		"lat": 48.869778,
+		"long": 2.313301,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Absolument sublime! Service remarquable, généreux et expert. Des plats juste inoubliables et un cadre somptueux. Le prix est important mais le résultat est mémorable. Allez-y!"
+			},
+			{
+				"stars": 4,
+				"comment": "Un établissement à très fort potentiel, ambiance chaleureuse et conviviale, personnels accueillants et serviables, lieux propres et calme"
+			},
+			{
+				"stars": 2,
+				"comment": "Dîner réservé il y a longtemps avec menu dégustation. Nous étions 6 et avons bien regretté que l’on nous impose les intolérances d’une personne dans le groupe ce qui retirait foie gras, truffe, fruits de mer !
+				Ensuite à ce niveau de restaurant, c’est dommage que le sommelier ne se soit pas rendu compte que son vin était bouchonné 
+				Les serveurs pour certains étaient un peu dédaigneux...comme si ils nous prenaient de haut
+				Pour finir, un prix pas à la hauteur de l’ensemble de la prestation 
+				Donc très très déçue par cette adresse"
+			}
+		]
+	},
+	{
+		"restaurantName": "Cru Restaurant",
+		"address": "48 Boulevard Haussmann, 75009 Paris",
+		"lat": 48.873912,
+		"long": 2.330570,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Absolument sublime! Service remarquable, généreux et expert. Des plats juste inoubliables et un cadre somptueux. Le prix est important mais le résultat est mémorable. Allez-y!"
+			},
+			{
+				"stars": 4,
+				"comment": "Un établissement à très fort potentiel, ambiance chaleureuse et conviviale, personnels accueillants et serviables, lieux propres et calme"
+			},
+			{
+				"stars": 2,
+				"comment": "Dîner réservé il y a longtemps avec menu dégustation. Nous étions 6 et avons bien regretté que l’on nous impose les intolérances d’une personne dans le groupe ce qui retirait foie gras, truffe, fruits de mer !
+				Ensuite à ce niveau de restaurant, c’est dommage que le sommelier ne se soit pas rendu compte que son vin était bouchonné 
+				Les serveurs pour certains étaient un peu dédaigneux...comme si ils nous prenaient de haut
+				Pour finir, un prix pas à la hauteur de l’ensemble de la prestation 
+				Donc très très déçue par cette adresse"
+			}
+		]
+	}
+]

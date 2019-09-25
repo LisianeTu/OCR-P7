@@ -14,10 +14,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
 	<link href="./css/styles.css" type="text/css" rel="stylesheet">
 	<link rel="icon" type="image/svg" href="./images/logo.svg" />
+	<script src="https://kit.fontawesome.com/15f6ba19ed.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -32,15 +32,15 @@
 			<div class="row justify-content-center mt-5">
 				<div id="input-location" class="input-group col-10 col-md-6">
 					<div class="input-group-prepend">
-						<button class="input-group-text" id="get-location-btn">
-							<i class="material-icons md-18">my_location</i>
+						<button class="btn btn-dark input-group-text" type="button" id="get-location-btn">
+							<i class="fas fa-crosshairs"></i>
 						</button>
 					</div>
 					<input id="location-input" type="text" name="location" placeholder="Votre localisation"
-						class="form-control form-control-md" autocomplete="off">
-					<div id="search-location-btn" class="input-group-append">
-						<button type="submit" class="input-group-text">Chercher</button>
-					</div>
+					class="form-control form-control-md" autocomplete="off">
+					<!-- <div class="input-group-append invisible">
+							<button class="btn btn-light input-group-text" type="button" id="clear-input-btn"><i class="fas fa-times"></i></button>
+						</div> -->
 				</div>
 			</div>
 		</section>
@@ -48,15 +48,14 @@
 		<section class="container-fluid">
 			<div id="options" class="row align-items-center">
 				<div id="add-rest" class="col-6">
-
 					<button>
-						<i class="material-icons mr-2">add_circle_outline</i> Ajouter un restaurant
+							<i class="fas fa-plus-circle"></i> Ajouter un restaurant
 					</button>
 				</div>
 				<div id="filters" class="col-6 text-right">
-					<span id="filter">Filtrer <i class="material-icons">keyboard_arrow_down</i></span>
+					<span id="filter">Filtrer <i class="fas fa-chevron-down"></i></span>
 					<span id="vert-sep" class="mx-2"> | </span>
-					<span id="sort">Trier <i class="material-icons">keyboard_arrow_down</i></span>
+					<span id="sort">Trier <i class="fas fa-chevron-down"></i></span>
 				</div>
 			</div>
 		</section>
