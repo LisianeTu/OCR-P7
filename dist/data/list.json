@@ -1,0 +1,114 @@
+[
+	{
+		"restaurantName": "Bronco",
+		"address": "39 Rue des Petites Écuries, 75010 Paris",
+		"lat": 48.8737815,
+		"long": 2.3501649,
+		"ratings": [
+			{
+				"stars": 4,
+				"comment": "Un excellent restaurant, j'y reviendrai ! Par contre il vaut mieux aimer la viande."
+			},
+			{
+				"stars": 5,
+				"comment": "Tout simplement mon restaurant préféré !"
+			}
+		]
+	},
+	{
+		"restaurantName": "Babalou",
+		"address": "4 Rue Lamarck, 75018 Paris",
+		"lat": 48.8865035,
+		"long": 2.3442197,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Une minuscule pizzeria délicieuse cachée juste à côté du Sacré choeur !"
+			},
+			{
+				"stars": 3,
+				"comment": "J'ai trouvé ça correct, sans plus"
+			}
+		]
+	},
+	{
+		"restaurantName": "Le Gabriel",
+		"address": "42 Avenue Gabriel, 75008 Paris",
+		"lat": 48.869778,
+		"long": 2.313301,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Absolument sublime! Service remarquable, généreux et expert. Des plats juste inoubliables et un cadre somptueux. Le prix est important mais le résultat est mémorable. Allez-y!"
+			},
+			{
+				"stars": 4,
+				"comment": "Un établissement à très fort potentiel, ambiance chaleureuse et conviviale, personnels accueillants et serviables, lieux propres et calme"
+			},
+			{
+				"stars": 2,
+				"comment": "Très très déçue par cette adresse."
+			}
+		]
+	},
+	{
+		"restaurantName": "Mama Shelter Paris",
+		"address": "109 Rue de Bagnolet, 75020 Paris",
+		"lat": 48.859704,
+		"long": 2.402853,
+		"ratings": [
+			{
+				"stars": 1,
+				"comment": "Il ne faut pas y aller pour aller boire un verre quand on est une dizaine."
+			},
+			{
+				"stars": 5,
+				"comment": "Lieu incroyable... plats simples néanmoins délicieux."
+			},
+			{
+				"stars": 5,
+				"comment": "Très bel endroit, chaleureux, discret, intimiste, très bon accueil et bon produits présentés."
+			}
+		]
+	},
+	{
+		"restaurantName": "Le Petit Cambodge",
+		"address": "20 Rue Alibert, 75010 Paris",
+		"lat": 48.871682,
+		"long": 2.368090,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Un lieu charmant. On y mange très bien. Tout est bon et l'ambiance est chaleureuse."
+			},
+			{
+				"stars": 2,
+				"comment": "Très bonne cuisine, mais le personnel manque énormément de respect."
+			},
+			{
+				"stars": 3,
+				"comment": "Accueil plutot agréable. Bonne nourriture, mais un peu cher pour ce que c'est."
+			}
+		]
+	},
+	{
+		"restaurantName": "Le bistro des oies",
+		"address": "2 Rue Marie et Louise, 75010 Paris",
+		"lat": 48.871931,
+		"long": 2.367363,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Sans faute! Service au top, plats excellents... Rien d'autres à dire, vous passez juste un moment très agréable."
+			},
+			{
+				"stars": 5,
+				"comment": "Magique, le patron est génial et son équipe est sans égale."
+			},
+			{
+				"stars": 5,
+				"comment": "Super endroit ! Cuisine délicieuse et produits de petits producteurs ! J'adore."
+			}
+		]
+	}
+]

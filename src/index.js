@@ -1,4 +1,5 @@
 import { getPosition, searchPlace } from './location.js';
+import { getRestList } from './restaurants.js';
 
 let gMap;
 
@@ -20,4 +21,4 @@ getLocationBtn.addEventListener('click', () => {
 	getPosition(gMap);
 });
 
-
+getRestList();
