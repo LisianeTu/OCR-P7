@@ -41,14 +41,33 @@ body {
 }
 
 #body-section {
-	height: 500px;
+	height: 800px;
+}
+
+#map {
+	height: 100%;
+}
+
+.card-header {
+	cursor: pointer;
 }
 
 .ratings {
 	font-size: 0.8rem;
 	line-height: 1.5rem;
+	color: #f8ce0b;
 }
 
-.card-header {
-	cursor: pointer;
+.stars-outer {
+  display: inline-block;
+  position: relative;
+}
+ 
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+	overflow: hidden;
+  width: 0;
 }

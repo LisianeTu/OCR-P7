@@ -1,7 +1,6 @@
 export { getPosition, searchPlace };
 
 let userPositionMarker, autocompleteInput;
-const markerImage = './images/user-position.png';
 
 function setMapOnPosition(map, position) {
 	if (userPositionMarker) userPositionMarker.setMap(null);
@@ -12,7 +11,7 @@ function setMapOnPosition(map, position) {
 	userPositionMarker = new google.maps.Marker({
 		position: position,
 		map: map,
-		icon: markerImage
+		icon: './images/user-position.png'
 	});
 }
 
@@ -25,7 +24,6 @@ function getAddress(posCoordinates) {
 			if (results[0]) { 
 				const address = results[0].formatted_address;
 				inputLocation.value = address;
-
 			} else {
 				inputLocation.value = 'Nous ne pouvons pas retrouver votre adresse.';
 			}

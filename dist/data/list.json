@@ -1,17 +1,17 @@
 [
 	{
-		"restaurantName": "Bronco",
+		"restaurantName": "Déviant",
 		"address": "39 Rue des Petites Écuries, 75010 Paris",
-		"lat": 48.8737815,
-		"long": 2.3501649,
+		"lat": 48.873874,
+		"long": 2.350086,
 		"ratings": [
 			{
-				"stars": 4,
-				"comment": "Un excellent restaurant, j'y reviendrai ! Par contre il vaut mieux aimer la viande."
+				"stars": 3,
+				"comment": "Bonne nourriture mais manger debout c'est pas top (certes je le savais avant d'y aller mais ma crainte a été confirmé). Assez cher."
 			},
 			{
 				"stars": 5,
-				"comment": "Tout simplement mon restaurant préféré !"
+				"comment": "Excellentissime! Tous les plats sont bons, les vins natures sont tops. J'en ai oublié que je mangeais debout et franchement j'ai hésité à y aller à cause de çà."
 			}
 		]
 	},
@@ -94,8 +94,8 @@
 	{
 		"restaurantName": "Le bistro des oies",
 		"address": "2 Rue Marie et Louise, 75010 Paris",
-		"lat": 48.871931,
-		"long": 2.367363,
+		"lat": 48.8719,
+		"long": 2.36747,
 		"ratings": [
 			{
 				"stars": 5,
