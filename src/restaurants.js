@@ -7,22 +7,34 @@ class Restaurant {
 		this.address = address,
 		this.lat = lat,
 		this.lng = lng,
-		this.ratings = ratings
+		this.ratings = ratings,
+		this.marker = ''
 	}
 
-	displayOnMap(map) {
+	displayMarker(map) {
 		const position = new google.maps.LatLng(this.lat, this.lng);
 		const newMarker = new google.maps.Marker({
 			position: position,
-			map: map
+			optimized:false,
+			map: map,
+			icon: `./images/restaurant-icon.png?i=${this.index}`
 		});
+
+		this.marker = newMarker;
 
 		newMarker.addListener('mouseover', () => {
 			document.getElementById(`card-${this.index}`).style.backgroundColor = '#f2f2f2';
+			newMarker.setZIndex(1000);
+			newMarker.setIcon(`./images/restaurant-icon-over.png?i=${this.index}`);
 		})
 
 		newMarker.addListener('mouseout', () => {
 			document.getElementById(`card-${this.index}`).style.backgroundColor = '';
+			newMarker.setZIndex();
+			newMarker.setIcon(`./images/restaurant-icon.png?i=${this.index}`);
+		})
+
+		newMarker.addListener('click', () => {
 		})
 	}
 
@@ -110,7 +122,9 @@ class Restaurant {
 		this.getCommentList();
 	}
 
-	clearRestaurant() {
+	clearRestaurant(map) {
+		const marker = this.marker;
+		marker.setMap(null);
 		const restaurantCard = document.getElementById(`card-${this.index}`);
 		if (restaurantCard) restaurantCard.remove();
 	}
@@ -126,20 +140,30 @@ function getRestList(map) {
 
 	xhr.addEventListener('readystatechange', () => {
 		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { 
-			const restList = xhr.response;
+			const restaurantsList = xhr.response;
 
-			restList.forEach((element, i) => {
-				const rest = new Restaurant(i, element.restaurantName, element.address, element.lat, element.long, element.ratings);
+			restaurantsList.forEach((element, i) => {
+				const restaurant = new Restaurant(i, element.restaurantName, element.address, element.lat, element.long, element.ratings);
 				
 				google.maps.event.addListener(map, 'idle', function() {
-					rest.clearRestaurant();
+					restaurant.clearRestaurant(map);
 					const mapBoundaries = map.getBounds();
 					if (mapBoundaries.contains({lat: element.lat, lng: element.long})) {  
-						rest.displayOnMap(map);
-						rest.displayRestaurantInList();
+						restaurant.displayMarker(map);
+						restaurant.displayRestaurantInList();
+
+						const restaurantMarker = restaurant.marker.icon;
+						const thisMarker = document.querySelector(`img[src='${restaurantMarker}']`);
+						if (thisMarker) {
+							thisMarker.setAttribute('data-toggle', 'collapse');
+						}
 					}
+
+					
 				});
 			});
 		}
 	});
+
+	
 }

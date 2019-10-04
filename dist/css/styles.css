@@ -75,3 +75,8 @@ body {
 	overflow: hidden;
   width: 0;
 }
+
+img[src*='restaurant-icon.png'] {
+	width: 20px;
+	height: 20px;
+}
