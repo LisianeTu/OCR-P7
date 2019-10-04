@@ -19,7 +19,8 @@ class Restaurant {
 			map: map,
 			icon: `./images/restaurant-icon.png?i=${this.index}`,
 			opacity: 0.8,
-			visible: false
+			visible: false,
+			isClicked: false
 		});
 
 		this.marker = newMarker;
@@ -31,12 +32,15 @@ class Restaurant {
 		})
 
 		newMarker.addListener('mouseout', () => {
-			document.getElementById(`card-${this.index}`).style.backgroundColor = '';
-			newMarker.setZIndex();
-			newMarker.setOpacity(0.8);
+			if (!newMarker.isClicked) {
+				document.getElementById(`card-${this.index}`).style.backgroundColor = '';
+				newMarker.setZIndex();
+				newMarker.setOpacity(0.8);
+			}
 		})
 
 		newMarker.addListener('click', () => {
+			newMarker.isClicked = true;
 			$(`#collapse-${this.index}`).collapse('toggle');
 		})
 	}
@@ -159,16 +163,24 @@ function getRestList(map) {
 						const restaurantMarker = restaurant.marker;
 						restaurantCard.addEventListener('mouseover', () => {
 							restaurantMarker.setOpacity(1);
+							restaurantMarker.setZIndex(1000);
 						})
 						restaurantCard.addEventListener('mouseout', () => {
-							restaurantMarker.setOpacity(0.7);
+							if (!restaurantMarker.isClicked) {
+								restaurantMarker.setOpacity(0.6);
+								restaurantMarker.setZIndex();
+							}
 						})
 
 						restaurantCollapsible.on('show.bs.collapse', () => {
+							restaurantMarker.isClicked = true;
 							restaurantMarker.setIcon(`./images/restaurant-icon-over.png?i=${restaurant.index}`);
+							restaurantMarker.setZIndex(100);
 						})
 						restaurantCollapsible.on('hide.bs.collapse', () => {
+							restaurantMarker.isClicked = false;
 							restaurantMarker.setIcon(`./images/restaurant-icon.png?i=${restaurant.index}`);
+							restaurantMarker.setZIndex();
 						})
 					} else {
 						restaurant.marker.setVisible(false);
