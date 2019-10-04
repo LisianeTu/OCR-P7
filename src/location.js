@@ -44,7 +44,7 @@ const getPosPromise = () => {
 function getPosition(map) {
 	getPosPromise()
 		.then((position) => {
-			let coordinates = {lat: position.coords.latitude, lng: position.coords.longitude};
+			let coordinates = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			setMapOnPosition(map, coordinates);
 			// get address from location
 			getAddress(coordinates);
