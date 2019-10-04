@@ -17,7 +17,9 @@ class Restaurant {
 			position: position,
 			optimized:false,
 			map: map,
-			icon: `./images/restaurant-icon.png?i=${this.index}`
+			icon: `./images/restaurant-icon.png?i=${this.index}`,
+			opacity: 0.8,
+			visible: false
 		});
 
 		this.marker = newMarker;
@@ -25,16 +27,17 @@ class Restaurant {
 		newMarker.addListener('mouseover', () => {
 			document.getElementById(`card-${this.index}`).style.backgroundColor = '#f2f2f2';
 			newMarker.setZIndex(1000);
-			newMarker.setIcon(`./images/restaurant-icon-over.png?i=${this.index}`);
+			newMarker.setOpacity(1);
 		})
 
 		newMarker.addListener('mouseout', () => {
 			document.getElementById(`card-${this.index}`).style.backgroundColor = '';
 			newMarker.setZIndex();
-			newMarker.setIcon(`./images/restaurant-icon.png?i=${this.index}`);
+			newMarker.setOpacity(0.8);
 		})
 
 		newMarker.addListener('click', () => {
+			$(`#collapse-${this.index}`).collapse('toggle');
 		})
 	}
 
@@ -122,9 +125,7 @@ class Restaurant {
 		this.getCommentList();
 	}
 
-	clearRestaurant(map) {
-		const marker = this.marker;
-		marker.setMap(null);
+	clearRestaurant() {
 		const restaurantCard = document.getElementById(`card-${this.index}`);
 		if (restaurantCard) restaurantCard.remove();
 	}
@@ -144,22 +145,34 @@ function getRestList(map) {
 
 			restaurantsList.forEach((element, i) => {
 				const restaurant = new Restaurant(i, element.restaurantName, element.address, element.lat, element.long, element.ratings);
-				
+				restaurant.displayMarker(map);
+
 				google.maps.event.addListener(map, 'idle', function() {
-					restaurant.clearRestaurant(map);
+					restaurant.clearRestaurant();
 					const mapBoundaries = map.getBounds();
 					if (mapBoundaries.contains({lat: element.lat, lng: element.long})) {  
-						restaurant.displayMarker(map);
 						restaurant.displayRestaurantInList();
+						restaurant.marker.setVisible(true);
+						
+						const restaurantCard = document.getElementById(`card-${restaurant.index}`);
+						const restaurantCollapsible = $(`#collapse-${restaurant.index}`);
+						const restaurantMarker = restaurant.marker;
+						restaurantCard.addEventListener('mouseover', () => {
+							restaurantMarker.setOpacity(1);
+						})
+						restaurantCard.addEventListener('mouseout', () => {
+							restaurantMarker.setOpacity(0.7);
+						})
 
-						const restaurantMarker = restaurant.marker.icon;
-						const thisMarker = document.querySelector(`img[src='${restaurantMarker}']`);
-						if (thisMarker) {
-							thisMarker.setAttribute('data-toggle', 'collapse');
-						}
-					}
-
-					
+						restaurantCollapsible.on('show.bs.collapse', () => {
+							restaurantMarker.setIcon(`./images/restaurant-icon-over.png?i=${restaurant.index}`);
+						})
+						restaurantCollapsible.on('hide.bs.collapse', () => {
+							restaurantMarker.setIcon(`./images/restaurant-icon.png?i=${restaurant.index}`);
+						})
+					} else {
+						restaurant.marker.setVisible(false);
+					}			
 				});
 			});
 		}
