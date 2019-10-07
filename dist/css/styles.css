@@ -48,10 +48,6 @@ body {
 	height: 100%;
 }
 
-.card:hover {
-	background-color: #f2f2f2;
-}
-
 .card-header {
 	cursor: pointer;
 }

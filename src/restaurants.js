@@ -11,40 +11,39 @@ class Restaurant {
 		this.marker = ''
 	}
 
+	// display custom marker on the map
 	displayMarker(map) {
+		// position of the restaurant
 		const position = new google.maps.LatLng(this.lat, this.lng);
+		// custom marker: used a parameter isClicked to avoid conflict between events click and mouse-out
 		const newMarker = new google.maps.Marker({
 			position: position,
 			optimized:false,
 			map: map,
 			icon: `./images/restaurant-icon.png?i=${this.index}`,
 			opacity: 0.8,
-			visible: false,
 			isClicked: false
 		});
 
 		this.marker = newMarker;
 
+		// mouse events on markers
 		newMarker.addListener('mouseover', () => {
-			document.getElementById(`card-${this.index}`).style.backgroundColor = '#f2f2f2';
-			newMarker.setZIndex(1000);
-			newMarker.setOpacity(1);
+			this.mouseOverRestaurant();
 		})
 
 		newMarker.addListener('mouseout', () => {
-			if (!newMarker.isClicked) {
-				document.getElementById(`card-${this.index}`).style.backgroundColor = '';
-				newMarker.setZIndex();
-				newMarker.setOpacity(0.8);
-			}
+			this.mouseOutRestaurant();
 		})
 
+		// click event on marker : activate collapse bootstrap function on cards accordion
 		newMarker.addListener('click', () => {
 			newMarker.isClicked = true;
 			$(`#collapse-${this.index}`).collapse('toggle');
 		})
 	}
 
+	// calculate the average rating from the array ratings: devide the sum of stars by the number of comments
 	calculateAvgRating() {
 		const ratings = this.ratings;
 		let averageRating= 0;
@@ -54,6 +53,7 @@ class Restaurant {
 		return averageRating /= ratings.length; 
 	}
 
+	// convert rating to stars: get the % on 5 of the rating, math round to have .5 results, % determine the width of stars to show and add stars HTML
 	convertRatingToStars(rate, container) {
 		const starPercentage = (rate / 5) * 100;
 		const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
@@ -75,10 +75,12 @@ class Restaurant {
 		);
 	}
 
+	// call to streetview api
 	getStreetViewImage() {
 		return `https://maps.googleapis.com/maps/api/streetview?location=${this.lat},${this.lng}&size=800x400&key=AIzaSyC86o_zLHvoyot6-6dWtkwxXYX7V6blO-U`;
 	}
 
+	// get the list of comments from the array ratings and call the function to convert and display ratings as stars
 	getCommentList() {
 		const ratings = this.ratings;
 		const container = document.getElementById(`comment-list-${this.index}`);
@@ -94,6 +96,7 @@ class Restaurant {
 		})
 	}
 
+	// creation of the restaurant card with cards accordion bootstrap element
 	createRestaurantCard() {
 		document.getElementById('accordionList').insertAdjacentHTML('beforeend',
 		`<div id="card-${this.index}" class="card border-top-0 border-left-0 border-right-0 border-bottom rounded-0">
@@ -120,21 +123,63 @@ class Restaurant {
 		);
 	}
 
+	// addition of the restaurant in the list with card creation, rating calculation and conversion to stars, and comments list - no duplicate
 	displayRestaurantInList() {
-		this.createRestaurantCard();
-		const avgRating = this.calculateAvgRating();
-		const avgRatingContainer = document.getElementById(`avg-rating-${this.index}`);
-		this.convertRatingToStars(avgRating, avgRatingContainer);
+		const existingCard = document.getElementById(`card-${this.index}`);
+		if (!document.getElementById('accordionList').contains(existingCard)) {
+			this.createRestaurantCard();
+			const avgRating = this.calculateAvgRating();
+			const avgRatingContainer = document.getElementById(`avg-rating-${this.index}`);
+			this.convertRatingToStars(avgRating, avgRatingContainer);
 
-		this.getCommentList();
+			this.getCommentList();
+		}
 	}
 
+	// actions on mouse over restaurant marker or list
+	mouseOverRestaurant() {
+		if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '#f2f2f2';
+		this.marker.setZIndex(1000);
+		this.marker.setOpacity(1);
+	}
+
+	// actions on mouse out restaurant marker or list
+	mouseOutRestaurant() {
+		if (!this.marker.isClicked) {
+			if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '';
+			this.marker.setZIndex();
+			this.marker.setOpacity(0.8);
+		}
+	}
+
+	// set parameters when restaurant is selected
+	activateRestaurant() {
+		this.marker.isClicked = true;
+		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.index}`);
+		this.marker.setZIndex(100);
+		this.marker.setOpacity(1);
+	}
+
+	// set parameters when restaurant is deselected
+	deactivateRestaurant() {
+		this.marker.isClicked = false;
+		this.marker.setIcon(`./images/restaurant-icon.png?i=${this.index}`);
+		this.marker.setZIndex();
+		this.marker.setOpacity(0.8);
+		if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '';
+	}
+
+	// clear the list of restaurants when map bounds change
 	clearRestaurant() {
 		const restaurantCard = document.getElementById(`card-${this.index}`);
-		if (restaurantCard) restaurantCard.remove();
+		if (restaurantCard) {
+			restaurantCard.remove(); 
+			this.deactivateRestaurant();
+		} 
 	}
 } 
 
+// call to json file with XMLHttp
 function getRestList(map) {
 	const jsonUrl = './data/list.json';
 	const xhr = new XMLHttpRequest();
@@ -147,43 +192,43 @@ function getRestList(map) {
 		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { 
 			const restaurantsList = xhr.response;
 
+			// for each restaurant in the json
 			restaurantsList.forEach((element, i) => {
+				// create a Restaurant object from class
 				const restaurant = new Restaurant(i, element.restaurantName, element.address, element.lat, element.long, element.ratings);
+				
+				// display the map marker
 				restaurant.displayMarker(map);
-
+				
+				// map event: when the map is "inactive" after other events
 				google.maps.event.addListener(map, 'idle', function() {
-					restaurant.clearRestaurant();
 					const mapBoundaries = map.getBounds();
+
+					// if the restaurant is included in the current map viewport
 					if (mapBoundaries.contains({lat: element.lat, lng: element.long})) {  
 						restaurant.displayRestaurantInList();
-						restaurant.marker.setVisible(true);
-						
+
 						const restaurantCard = document.getElementById(`card-${restaurant.index}`);
 						const restaurantCollapsible = $(`#collapse-${restaurant.index}`);
-						const restaurantMarker = restaurant.marker;
+						
+						// restaurant card mouse events to link list and markers
 						restaurantCard.addEventListener('mouseover', () => {
-							restaurantMarker.setOpacity(1);
-							restaurantMarker.setZIndex(1000);
+							restaurant.mouseOverRestaurant();
 						})
 						restaurantCard.addEventListener('mouseout', () => {
-							if (!restaurantMarker.isClicked) {
-								restaurantMarker.setOpacity(0.6);
-								restaurantMarker.setZIndex();
-							}
+							restaurant.mouseOutRestaurant();
 						})
 
+						// display active marker when the restaurant card is shown
 						restaurantCollapsible.on('show.bs.collapse', () => {
-							restaurantMarker.isClicked = true;
-							restaurantMarker.setIcon(`./images/restaurant-icon-over.png?i=${restaurant.index}`);
-							restaurantMarker.setZIndex(100);
+							restaurant.activateRestaurant();
 						})
+						// reverse when restaurant card is hidden
 						restaurantCollapsible.on('hide.bs.collapse', () => {
-							restaurantMarker.isClicked = false;
-							restaurantMarker.setIcon(`./images/restaurant-icon.png?i=${restaurant.index}`);
-							restaurantMarker.setZIndex();
+							restaurant.deactivateRestaurant();
 						})
 					} else {
-						restaurant.marker.setVisible(false);
+						restaurant.clearRestaurant();
 					}			
 				});
 			});
