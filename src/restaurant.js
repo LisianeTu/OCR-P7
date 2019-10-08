@@ -8,6 +8,7 @@ class Restaurant {
 			this.lat = lat,
 			this.lng = lng,
 			this.ratings = ratings,
+			this.averageRating = 0,
 			this.marker = ''
 	}
 
@@ -49,8 +50,10 @@ class Restaurant {
 		let averageRating = 0;
 		ratings.forEach(element => {
 			averageRating += element.stars;
-		})
-		return averageRating /= ratings.length;
+		});
+		averageRating /= ratings.length;
+		this.averageRating = averageRating;
+		return averageRating;
 	}
 
 	// convert rating to stars: get the % on 5 of the rating, math round to have .5 results, % determine the width of stars to show and add stars HTML
@@ -131,7 +134,6 @@ class Restaurant {
 			const avgRating = this.calculateAvgRating();
 			const avgRatingContainer = document.getElementById(`avg-rating-${this.index}`);
 			this.convertRatingToStars(avgRating, avgRatingContainer);
-
 			this.getCommentList();
 		}
 	}

@@ -3,6 +3,7 @@ export { getRestList };
 
 // call to json file with XMLHttp
 function getRestList(map) {
+
 	const jsonUrl = './data/list.json';
 	const xhr = new XMLHttpRequest();
 
@@ -13,12 +14,11 @@ function getRestList(map) {
 	xhr.addEventListener('readystatechange', () => {
 		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
 			const restaurantsList = xhr.response;
-
 			// for each restaurant in the json
 			restaurantsList.forEach((element, i) => {
 				// create a Restaurant object from class
 				const restaurant = new Restaurant(i, element.restaurantName, element.address, element.lat, element.long, element.ratings);
-
+				
 				// display the map marker
 				restaurant.displayMarker(map);
 

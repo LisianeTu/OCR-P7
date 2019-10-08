@@ -1,5 +1,6 @@
 import { getPosition, searchPlace } from './location.js';
 import { getRestList } from './restaurantsList.js';
+import { filterRestaurantList } from './filters.js';
 
 let gMap;
 
@@ -30,3 +31,6 @@ const getLocationBtn = document.getElementById('get-location-btn');
 getLocationBtn.addEventListener('click', () => {
 	getPosition(gMap);
 });
+
+filterRestaurantList();
+
