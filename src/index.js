@@ -1,7 +1,6 @@
 import { getPosition, searchPlace } from './location.js';
 import { getRestList } from './restaurantsList.js';
 
-
 let gMap;
 
 window.initMap = () => {
@@ -31,6 +30,3 @@ const getLocationBtn = document.getElementById('get-location-btn');
 getLocationBtn.addEventListener('click', () => {
 	getPosition(gMap);
 });
-
-
-
