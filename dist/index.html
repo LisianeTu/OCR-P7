@@ -12,70 +12,154 @@
 	<title>Où est-ce qu'on mange ?</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
 	<link href="./css/styles.css" type="text/css" rel="stylesheet">
 	<link rel="icon" type="image/svg" href="./images/logo.svg" />
 	<script src="https://kit.fontawesome.com/15f6ba19ed.js" crossorigin="anonymous"></script>
 </head>
 
+
+
 <body>
-
-	<body>
-		<section id="header" class="container-fluid">
-			<div class="row text-center">
-				<div id="logo" class="col mt-2">
-					<img src="./images/logo.svg" alt="Logo">
-				</div>
+	<section id="header" class="container-fluid">
+		<div class="row text-center">
+			<div id="logo" class="col mt-2">
+				<img src="./images/logo.svg" alt="Logo">
 			</div>
-			<div class="row justify-content-center mt-5">
-				<div id="input-location" class="input-group col-10 col-md-6 position-relative">
-					<div class="input-group-prepend">
-						<button class="btn btn-dark input-group-text" type="button" id="get-location-btn">
-							<i class="fas fa-crosshairs"></i>
-						</button>
-					</div>
-					<input id="location-input" type="text" name="location" placeholder="Votre localisation"
-					class="form-control form-control-md" autocomplete="off">
-				</div>
-			</div>
-		</section>
-
-		<section class="container-fluid">
-			<div id="options" class="row align-items-center">
-				<div id="add-rest" class="col-6">
-					<button>
-							<i class="fas fa-plus-circle"></i> Ajouter un restaurant
+		</div>
+		<div class="row justify-content-center mt-5">
+			<div id="input-location" class="input-group col-10 col-md-6 position-relative">
+				<div class="input-group-prepend">
+					<button class="btn btn-dark input-group-text" type="button" id="get-location-btn">
+						<i class="fas fa-crosshairs"></i>
 					</button>
 				</div>
-				<div id="filters" class="col-6 text-right">
-					<span id="filter">Filtrer <i class="fas fa-chevron-down"></i></span>
-					<span id="vert-sep" class="mx-2"> | </span>
-					<span id="sort">Trier <i class="fas fa-chevron-down"></i></span>
+				<input id="location-input" type="text" name="location" placeholder="Votre localisation"
+					class="form-control form-control-md" autocomplete="off">
+			</div>
+		</div>
+	</section>
+
+	<section class="container-fluid">
+		<div id="options" class="row align-items-center">
+			<div id="add-rest" class="col-6">
+				<button>
+					<i id="add-rest-icon" class="fas fa-plus-circle"></i> Ajouter un restaurant
+				</button>
+			</div>
+			<div id="filters" class="col-6 text-right">
+				<div class="row justify-content-end no-gutters">
+					<div id="filter" class="dropdown">
+						<button class="btn" type="button" id="dropdown-filter-btn" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
+							Filtrer <i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdown-filter-btn">
+							<form id="filter-form" autocomplete="off">
+								<div class="dropdown-item form-check">
+									<input class="form-check-input" type="radio" name="filter-by-ratings" id="filter-from1"
+										value="from1">
+									<label class="form-check-label" for="filter-from1">
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										et plus
+									</label>
+								</div>
+								<div class="dropdown-item form-check">
+									<input class="form-check-input" type="radio" name="filter-by-ratings" id="filter-from2"
+										value="from2">
+									<label class="form-check-label" for="filter-from2">
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										et plus
+									</label>
+								</div>
+								<div class="dropdown-item form-check">
+									<input class="form-check-input" type="radio" name="filter-by-ratings" id="filter-from3"
+										value="from3">
+									<label class="form-check-label" for="filter-from3">
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										et plus
+									</label>
+								</div>
+								<div class="dropdown-item form-check">
+									<input class="form-check-input" type="radio" name="filter-by-ratings" id="filter-from4"
+										value="from4">
+									<label class="form-check-label" for="filter-from4">
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter far fa-star"></i>
+										et plus
+									</label>
+								</div>
+								<div class="dropdown-item form-check">
+									<input class="form-check-input" type="radio" name="filter-by-ratings" id="filter-from5"
+										value="from5">
+									<label class="form-check-label" for="filter-from5">
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+										<i class="ratings-filter fas fa-star"></i>
+									</label>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div id="vert-sep" class="mx-2 pt-2"> | </div>
+					<div id="sort">
+						<button class="btn" type="button" id="dropdown-sort-btn" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
+							Trier <i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdown-sort-btn">
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<section class="container-fluid" id="body-section">
-			<div class="row h-100">
-				<div id="map" class="col-12 col-md-8 pl-0">
-				</div>
-				<div id="list" class="col-12 col-md-4">
-					<div class="accordion" id="accordionList"></div>
-				</div>
+	<section class="container-fluid" id="body-section">
+		<div class="row h-100">
+			<div id="map" class="col-12 col-md-8 pl-0">
 			</div>
-		</section>
+			<div id="list" class="col-12 col-md-4">
+				<div class="accordion" id="accordionList"></div>
+			</div>
+		</div>
+	</section>
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!--[if lt IE 7]>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
-		<script src="bundle.js"></script>
-		<script async defer
+	<script src="bundle.js"></script>
+	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC86o_zLHvoyot6-6dWtkwxXYX7V6blO-U&callback=initMap&libraries=places"></script>
-	</body>
+</body>
 
 </html>

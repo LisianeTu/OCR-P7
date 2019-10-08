@@ -18,11 +18,11 @@ body {
 }
 
 #options {
-	background-color: #f3f3f3;
+	background-color: #f2f2f2;
 	height: 60px;
 }
 
-#options .fas {
+#add-rest-icon, .fa-chevron-down, .fa-plus-circle {
 	line-height: 1.5rem;
 	margin: 0 5px;
 }
@@ -38,6 +38,11 @@ body {
 	vertical-align: middle;
 	background: none;
 	color: #23272b;
+}
+
+.ratings-filter {
+	font-size: 0.8rem;
+	color: #f8ce0b;
 }
 
 #body-section {
@@ -70,9 +75,4 @@ body {
   white-space: nowrap;
 	overflow: hidden;
   width: 0;
-}
-
-img[src*='restaurant-icon.png'] {
-	width: 20px;
-	height: 20px;
 }
