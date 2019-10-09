@@ -20,10 +20,7 @@ window.initMap = () => {
 	getPosition(gMap);
 	
 	// autocomplete address input
-	searchPlace(gMap);
-
-	// get the list of restaurants
-	getRestList(gMap);
+	searchPlace(gMap);	
 }
 
 // geoloc button action
@@ -31,6 +28,16 @@ const getLocationBtn = document.getElementById('get-location-btn');
 getLocationBtn.addEventListener('click', () => {
 	getPosition(gMap);
 });
+
+
+// call the json containing the list of restaurant
+fetch('./data/list.json')
+	.then(response => response.json()) // transform the data into json
+	.then(data => getRestList(data, gMap)) // use the data to display restaurants
+	.catch(err => { console.log(err)})
+
+
+
 
 filterRestaurantList();
 
