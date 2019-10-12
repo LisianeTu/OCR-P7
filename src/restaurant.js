@@ -1,14 +1,16 @@
 export { Restaurant };
 
 class Restaurant {
-	constructor(name, address, lat, lng, ratings) {
+	constructor(elementIndex, name, address, lat, lng, ratings) {
+		this.index = name.replace(/\s+/g, '').toLowerCase(),
 		this.name = name,
 		this.address = address,
 		this.lat = lat,
 		this.lng = lng,
 		this.ratings = ratings,
 		this.averageRating = 0,
-		this.marker = ''
+		this.marker = '',
+		this.elementIndex = elementIndex
 	}
 
 	// display custom marker on the map
@@ -20,7 +22,7 @@ class Restaurant {
 			position: position,
 			optimized: false,
 			map: map,
-			icon: `./images/restaurant-icon.png?i=${this.name}`,
+			icon: `./images/restaurant-icon.png?i=${this.index}`,
 			opacity: 0.8,
 			isClicked: false
 		});
@@ -39,7 +41,7 @@ class Restaurant {
 		// click event on marker : activate collapse bootstrap function on cards accordion
 		newMarker.addListener('click', () => {
 			newMarker.isClicked = true;
-			$(`#collapse-${this.name}`).collapse('toggle');
+			$(`#collapse-${this.index}`).collapse('toggle');
 		})
 	}
 
@@ -85,15 +87,15 @@ class Restaurant {
 	// get the list of comments from the array ratings and call the function to convert and display ratings as stars
 	getCommentList() {
 		const ratings = this.ratings;
-		const container = document.getElementById(`comment-list-${this.name}`);
+		const container = document.getElementById(`comment-list-${this.index}`);
 		ratings.forEach((element, index) => {
 			container.insertAdjacentHTML('beforeend',
 				`<li class="list-group-item">
-					<div id="rest-${this.name}-com-${index}" class="ratings"></div>
+					<div id="rest-${this.index}-com-${index}" class="ratings"></div>
 					<div class="font-italic">${element.comment}</div>
 				</li>`
 			);
-			const rateContainer = document.getElementById(`rest-${this.name}-com-${index}`);
+			const rateContainer = document.getElementById(`rest-${this.index}-com-${index}`);
 			this.convertRatingToStars(element.stars, rateContainer);
 		})
 	}
@@ -101,23 +103,23 @@ class Restaurant {
 	// creation of the restaurant card with cards accordion bootstrap element
 	createRestaurantCard() {
 		document.getElementById('accordionList').insertAdjacentHTML('beforeend',
-			`<div id="card-${this.name}" class="card border-top-0 border-left-0 border-right-0 border-bottom rounded-0">
-			<div class="card-header btn btn-link border-0 bg-transparent text-reset text-decoration-none" class="collapse" id="header-${this.name}" data-toggle="collapse" data-target="#collapse-${this.name}">
+			`<div id="card-${this.index}" class="card border-top-0 border-left-0 border-right-0 border-bottom rounded-0">
+			<div class="card-header btn btn-link border-0 bg-transparent text-reset text-decoration-none" class="collapse" id="header-${this.index}" data-toggle="collapse" data-target="#collapse-${this.index}">
 					<div class="row justify-content-between">
 						<div class="font-weight-bold">${this.name}</div>
-						<div id="avg-rating-${this.name}" class="ratings text-right">
+						<div id="avg-rating-${this.index}" class="ratings text-right">
 						</div>
 					</div>
 					<div class="row">
 						<span>${this.address}</span>
 					</div>
 				</div>
-				<div id="collapse-${this.name}" class="collapse" aria-labelledby="header-${this.name}" data-parent="#accordionList">
+				<div id="collapse-${this.index}" class="collapse" aria-labelledby="header-${this.index}" data-parent="#accordionList">
 					<div class="card-body">
 						<div class="img-street-view">
 							<img class="w-100" src="${this.getStreetViewImage()}"
 						</div>
-						<ul id="comment-list-${this.name}" class="list-group-flush p-0">
+						<ul id="comment-list-${this.index}" class="list-group-flush p-0">
 						</ul>
 					</div>
 				</div>
@@ -127,19 +129,16 @@ class Restaurant {
 
 	// addition of the restaurant in the list with card creation, rating calculation and conversion to stars, and comments list - no duplicate
 	displayRestaurantInList() {
-		const existingCard = document.getElementById(`card-${this.name}`);
-		if (!document.getElementById('accordionList').contains(existingCard)) {
-			this.createRestaurantCard();
-			const avgRating = this.calculateAvgRating();
-			const avgRatingContainer = document.getElementById(`avg-rating-${this.name}`);
-			this.convertRatingToStars(avgRating, avgRatingContainer);
-			this.getCommentList();
-		}
+		this.createRestaurantCard();
+		const avgRating = this.calculateAvgRating();
+		const avgRatingContainer = document.getElementById(`avg-rating-${this.index}`);
+		this.convertRatingToStars(avgRating, avgRatingContainer);
+		this.getCommentList();
 	}
 
 	// actions on mouse over restaurant marker or list
 	mouseOverRestaurant() {
-		if (document.getElementById(`card-${this.name}`)) document.getElementById(`card-${this.name}`).style.backgroundColor = '#f2f2f2';
+		if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '#f2f2f2';
 		this.marker.setZIndex(1000);
 		this.marker.setOpacity(1);
 	}
@@ -147,7 +146,7 @@ class Restaurant {
 	// actions on mouse out restaurant marker or list
 	mouseOutRestaurant() {
 		if (!this.marker.isClicked) {
-			if (document.getElementById(`card-${this.name}`)) document.getElementById(`card-${this.name}`).style.backgroundColor = '';
+			if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '';
 			this.marker.setZIndex();
 			this.marker.setOpacity(0.8);
 		}
@@ -156,7 +155,7 @@ class Restaurant {
 	// set parameters when restaurant is selected
 	activateRestaurant() {
 		this.marker.isClicked = true;
-		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.name}`);
+		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.index}`);
 		this.marker.setZIndex(100);
 		this.marker.setOpacity(1);
 	}
@@ -164,18 +163,19 @@ class Restaurant {
 	// set parameters when restaurant is deselected
 	deactivateRestaurant() {
 		this.marker.isClicked = false;
-		this.marker.setIcon(`./images/restaurant-icon.png?i=${this.name}`);
+		this.marker.setIcon(`./images/restaurant-icon.png?i=${this.index}`);
 		this.marker.setZIndex();
 		this.marker.setOpacity(0.8);
-		if (document.getElementById(`card-${this.name}`)) document.getElementById(`card-${this.name}`).style.backgroundColor = '';
+		if (document.getElementById(`card-${this.index}`)) document.getElementById(`card-${this.index}`).style.backgroundColor = '';
 	}
 
-	// clear the list of restaurants when map bounds change
-	clearRestaurant() {
-		const restaurantCard = document.getElementById(`card-${this.name}`);
+	// clear the list of restaurants
+	clearRestaurant(map) {
+		const restaurantCard = document.getElementById(`card-${this.index}`);
 		if (restaurantCard) {
 			restaurantCard.remove();
 			this.deactivateRestaurant();
 		}
+		this.marker.setMap(null);
 	}
 }
