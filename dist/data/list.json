@@ -1,114 +1,154 @@
 [
 	{
-		 "restaurantName":"Le Gibraltar",
-		 "address":"61 Avenue Libert, 91210 Draveil",
-		 "lat":48.688360,
-		 "long":2.389958,
-		 "ratings":[
-				{
-					 "stars":3,
-					 "comment":"Bonne nourriture mais manger debout c'est pas top (certes je le savais avant d'y aller mais ma crainte a été confirmé). Assez cher."
-				},
-				{
-					 "stars":5,
-					 "comment":"Excellentissime! Tous les plats sont bons, les vins natures sont tops. J'en ai oublié que je mangeais debout et franchement j'ai hésité à y aller à cause de çà."
-				}
-		 ]
+		"restaurantName": "Le Gibraltar",
+		"address": "61 Avenue Libert, 91210 Draveil",
+		"lat": 48.688360,
+		"long": 2.389958,
+		"ratings": [
+			{
+				"stars": 3,
+				"comment": "Bonne nourriture mais manger debout c'est pas top (certes je le savais avant d'y aller mais ma crainte a été confirmé). Assez cher."
+			},
+			{
+				"stars": 5,
+				"comment": "Excellentissime! Tous les plats sont bons, les vins natures sont tops. J'en ai oublié que je mangeais debout et franchement j'ai hésité à y aller à cause de çà."
+			}
+		]
 	},
 	{
-		 "restaurantName":"Babalou",
-		 "address":"4 Rue Lamarck, 75018 Paris",
-		 "lat":48.8865035,
-		 "long":2.3442197,
-		 "ratings":[
-				{
-					 "stars":5,
-					 "comment":"Une minuscule pizzeria délicieuse cachée juste à côté du Sacré choeur !"
-				},
-				{
-					 "stars":3,
-					 "comment":"J'ai trouvé ça correct, sans plus"
-				}
-		 ]
+		"restaurantName": "O Mac 2",
+		"address": "61 Rue Monttessuy, 91260 Juvisy-sur-Orge",
+		"lat": 48.689054,
+		"long": 2.384936,
+		"ratings": [
+			{
+				"stars": 1,
+				"comment": "On se demande si ce sont des hommes ou des bêtes qui tiennent ce service de restauration '' rapide ''."
+			},
+			{
+				"stars": 1,
+				"comment": "Ce serait bien d'arrêter de se fouttre de la gueule du client. De respecter les délais de livraison pour les commandes (2h de retard) et d'être un peu plus aimable au téléphone quand on demande légitimement où en est notre commande, qu'on a quand même payée..."
+			},
+			{
+				"stars": 1,
+				"comment": "Reçu la nourriture ou toute les options que on a prise non pas été prise en compte. Les frites sont froides, et pas toutes les boissons était dedans. Inacceptable."
+			}
+		]
 	},
 	{
-		 "restaurantName":"Le Gabriel",
-		 "address":"42 Avenue Gabriel, 75008 Paris",
-		 "lat":48.869778,
-		 "long":2.313301,
-		 "ratings":[
-				{
-					 "stars":5,
-					 "comment":"Absolument sublime! Service remarquable, généreux et expert. Des plats juste inoubliables et un cadre somptueux. Le prix est important mais le résultat est mémorable. Allez-y!"
-				},
-				{
-					 "stars":4,
-					 "comment":"Un établissement à très fort potentiel, ambiance chaleureuse et conviviale, personnels accueillants et serviables, lieux propres et calme"
-				},
-				{
-					 "stars":2,
-					 "comment":"Très très déçue par cette adresse."
-				}
-		 ]
+		"restaurantName": "Babalou",
+		"address": "4 Rue Lamarck, 75018 Paris",
+		"lat": 48.8865035,
+		"long": 2.3442197,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Une minuscule pizzeria délicieuse cachée juste à côté du Sacré choeur !"
+			},
+			{
+				"stars": 3,
+				"comment": "J'ai trouvé ça correct, sans plus"
+			}
+		]
 	},
 	{
-		 "restaurantName":"Mama Shelter Paris",
-		 "address":"109 Rue de Bagnolet, 75020 Paris",
-		 "lat":48.859704,
-		 "long":2.402853,
-		 "ratings":[
-				{
-					 "stars":1,
-					 "comment":"Il ne faut pas y aller pour aller boire un verre quand on est une dizaine."
-				},
-				{
-					 "stars":5,
-					 "comment":"Lieu incroyable... plats simples néanmoins délicieux."
-				},
-				{
-					 "stars":5,
-					 "comment":"Très bel endroit, chaleureux, discret, intimiste, très bon accueil et bon produits présentés."
-				}
-		 ]
+		"restaurantName": "Le Gabriel",
+		"address": "42 Avenue Gabriel, 75008 Paris",
+		"lat": 48.869778,
+		"long": 2.313301,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Absolument sublime! Service remarquable, généreux et expert. Des plats juste inoubliables et un cadre somptueux. Le prix est important mais le résultat est mémorable. Allez-y!"
+			},
+			{
+				"stars": 4,
+				"comment": "Un établissement à très fort potentiel, ambiance chaleureuse et conviviale, personnels accueillants et serviables, lieux propres et calme"
+			},
+			{
+				"stars": 2,
+				"comment": "Très très déçue par cette adresse."
+			}
+		]
 	},
 	{
-		 "restaurantName":"Le Petit Cambodge",
-		 "address":"20 Rue Alibert, 75010 Paris",
-		 "lat":48.871682,
-		 "long":2.368090,
-		 "ratings":[
-				{
-					 "stars":5,
-					 "comment":"Un lieu charmant. On y mange très bien. Tout est bon et l'ambiance est chaleureuse."
-				},
-				{
-					 "stars":2,
-					 "comment":"Très bonne cuisine, mais le personnel manque énormément de respect."
-				},
-				{
-					 "stars":3,
-					 "comment":"Accueil plutot agréable. Bonne nourriture, mais un peu cher pour ce que c'est."
-				}
-		 ]
+		"restaurantName": "Mama Shelter Paris",
+		"address": "109 Rue de Bagnolet, 75020 Paris",
+		"lat": 48.859704,
+		"long": 2.402853,
+		"ratings": [
+			{
+				"stars": 1,
+				"comment": "Il ne faut pas y aller pour aller boire un verre quand on est une dizaine."
+			},
+			{
+				"stars": 5,
+				"comment": "Lieu incroyable... plats simples néanmoins délicieux."
+			},
+			{
+				"stars": 5,
+				"comment": "Très bel endroit, chaleureux, discret, intimiste, très bon accueil et bon produits présentés."
+			}
+		]
 	},
 	{
-		 "restaurantName":"Le bistro des oies",
-		 "address":"2 Rue Marie et Louise, 75010 Paris",
-		 "lat":48.8719,
-		 "long":2.36747,
-		 "ratings":[
-				{
-					 "stars":5,
-					 "comment":"Sans faute! Service au top, plats excellents... Rien d'autres à dire, vous passez juste un moment très agréable."
-				},
-				{
-					 "stars":5,
-					 "comment":"Magique, le patron est génial et son équipe est sans égale."
-				},
-				{
-					 "stars":5,
-					 "comment":"Super endroit ! Cuisine délicieuse et produits de petits producteurs ! J'adore."
-				}
-		 ]
+		"restaurantName": "Le Petit Cambodge",
+		"address": "20 Rue Alibert, 75010 Paris",
+		"lat": 48.871682,
+		"long": 2.368090,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Un lieu charmant. On y mange très bien. Tout est bon et l'ambiance est chaleureuse."
+			},
+			{
+				"stars": 2,
+				"comment": "Très bonne cuisine, mais le personnel manque énormément de respect."
+			},
+			{
+				"stars": 3,
+				"comment": "Accueil plutot agréable. Bonne nourriture, mais un peu cher pour ce que c'est."
+			}
+		]
+	},
+	{
+		"restaurantName": "Le bistro des oies",
+		"address": "2 Rue Marie et Louise, 75010 Paris",
+		"lat": 48.8719,
+		"long": 2.36747,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Sans faute! Service au top, plats excellents... Rien d'autres à dire, vous passez juste un moment très agréable."
+			},
+			{
+				"stars": 5,
+				"comment": "Magique, le patron est génial et son équipe est sans égale."
+			},
+			{
+				"stars": 5,
+				"comment": "Super endroit ! Cuisine délicieuse et produits de petits producteurs ! J'adore."
+			}
+		]
+	},
+	{
+		"restaurantName": "Bundy'Z | Restaurant Africain",
+		"address": "17 Rue Pierre Semard, 91260 Juvisy-sur-Orge",
+		"lat": 48.688493,
+		"long": 2.381481,
+		"ratings": [
+			{
+				"stars": 5,
+				"comment": "Excellent. Vrai recette africaine. Simple mais très bons !! Les poissons sont bons et frais. Le poulet aussi. Un régal."
+			},
+			{
+				"stars": 1,
+				"comment": "Désolant. ..personnel froid et sec ...repas sans goût. ..venu avec mon fils les poulets carbonisé et le tieb sans légume restaurant sale .Je ne le conseil pas"
+			},
+			{
+				"stars": 4,
+				"comment": "Très bon. Le poissons frit et la sauce sont un pur régal"
+			}
+		]
 	}
 ]

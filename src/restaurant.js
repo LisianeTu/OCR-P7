@@ -2,7 +2,7 @@ export { Restaurant };
 
 class Restaurant {
 	constructor(elementIndex, name, address, lat, lng, ratings) {
-		this.index = name.replace(/\s+/g, '').toLowerCase(),
+		this.index = name.replace(/[\s|'|]+/g, '').toLowerCase(),
 		this.name = name,
 		this.address = address,
 		this.lat = lat,
