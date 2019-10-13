@@ -1,5 +1,7 @@
 import { Restaurant } from './restaurant.js';
+import { filterRestaurantList } from './filters.js';
 export { getRestList };
+export { visibleRestaurants };
 
 let visibleRestaurants = [];
 
@@ -57,5 +59,7 @@ function getRestList(data, map) {
 			}
 		}
 	});
+
+	filterRestaurantList();
 }
 

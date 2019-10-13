@@ -1,6 +1,5 @@
 import { getPosition, searchPlace } from './location.js';
 import { getRestList } from './restaurantsList.js';
-import { filterRestaurantList } from './filters.js';
 
 let gMap;
 
@@ -36,8 +35,4 @@ fetch('./data/list.json')
 	.then(data => getRestList(data, gMap)) // use the data to display restaurants
 	.catch(err => { console.log(err)})
 
-
-
-
-filterRestaurantList();
 

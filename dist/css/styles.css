@@ -45,6 +45,14 @@ body {
 	color: #f8ce0b;
 }
 
+#current-filter {
+	border-radius: 25px;
+}
+
+#current-filter-label .ratings-filter {
+	line-height: 2.2rem;
+}
+
 #body-section {
 	height: 500px;
 }

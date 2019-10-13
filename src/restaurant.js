@@ -24,7 +24,8 @@ class Restaurant {
 			map: map,
 			icon: `./images/restaurant-icon.png?i=${this.index}`,
 			opacity: 0.8,
-			isClicked: false
+			isClicked: false,
+			visible: true
 		});
 
 		this.marker = newMarker;
@@ -177,5 +178,17 @@ class Restaurant {
 			this.deactivateRestaurant();
 		}
 		this.marker.setMap(null);
+	}
+
+	hide() {
+		const restaurantCard = document.getElementById(`card-${this.index}`);
+		restaurantCard.classList.add('d-none');
+		this.marker.setVisible(false);
+	}
+
+	show() {
+		const restaurantCard = document.getElementById(`card-${this.index}`);
+		restaurantCard.classList.remove('d-none');
+		this.marker.setVisible(true);
 	}
 }
