@@ -82,7 +82,7 @@ class Restaurant {
 
 	// call to streetview api
 	getStreetViewImage() {
-		return `https://maps.googleapis.com/maps/api/streetview?location=${this.lat},${this.lng}&size=800x400&key=AIzaSyBY_-_fuIgtxCYUn84JlHi8cPO_QOHzYVQ`;
+		return `https://maps.googleapis.com/maps/api/streetview?location=${this.lat},${this.lng}&size=800x400`;
 	}
 
 	// get the list of comments from the array ratings and call the function to convert and display ratings as stars
