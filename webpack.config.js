@@ -10,6 +10,7 @@ module.exports = {
 	devtool: 'inline-source-map',
 	devServer: {
 		contentBase: './dist',
-		https: true
+		https: false,
+		port: 8686
 	}
 };

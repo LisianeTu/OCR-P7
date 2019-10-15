@@ -5,7 +5,7 @@ body {
 }
 
 #header {
-	height: 400px;
+	height: 250px;
 	background-image: url("../images/header-bg.jpg");
 	background-color: #fff;
 	background-size: cover;
@@ -14,7 +14,7 @@ body {
 }
 
 #header #logo img {
-	width: 300px;
+	width: 200px;
 }
 
 #options {
@@ -32,14 +32,6 @@ body {
   vertical-align: middle;
 }
 
-#add-rest button {
-	border: none;
-	display: inline-flex;
-	vertical-align: middle;
-	background: none;
-	color: #23272b;
-}
-
 .ratings-filter {
 	font-size: 0.8rem;
 	color: #f8ce0b;
@@ -54,11 +46,16 @@ body {
 }
 
 #body-section {
-	height: 500px;
+	height: calc(100vh - 310px);
 }
 
 #map {
 	height: 100%;
+}
+
+#list {
+	height: 100%;
+	overflow: scroll;
 }
 
 .card-header {

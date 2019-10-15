@@ -29,7 +29,7 @@
 				<img src="./images/logo.svg" alt="Logo">
 			</div>
 		</div>
-		<div class="row justify-content-center mt-5">
+		<div class="row justify-content-center mt-3">
 			<div id="input-location" class="input-group col-10 col-md-6 position-relative">
 				<div class="input-group-prepend">
 					<button class="btn btn-dark input-group-text" type="button" id="get-location-btn">
@@ -45,7 +45,7 @@
 	<section class="container-fluid">
 		<div id="options" class="row align-items-center">
 			<div id="add-rest" class="col-6">
-				<button>
+				<button class="btn">
 					<i id="add-rest-icon" class="fas fa-plus-circle"></i> Ajouter un restaurant
 				</button>
 			</div>
@@ -139,6 +139,8 @@
 		</div>
 	</section>
 
+	<div id="modal-container"></div>
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -154,7 +156,7 @@
 
 	<script src="bundle.js"></script>
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY_-_fuIgtxCYUn84JlHi8cPO_QOHzYVQ&callback=initMap&libraries=places"></script>
 </body>
 
 </html>

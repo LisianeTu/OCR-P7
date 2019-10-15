@@ -1,11 +1,10 @@
 import { Restaurant } from './restaurant.js';
 import { filterRestaurantList } from './filters.js';
-export { getRestList };
-export { visibleRestaurants };
+export { getRestList, visibleRestaurants };
 
 let visibleRestaurants = [];
 
-function isInArray(array, value) {
+function isIndexInArray(array, value) {
 	if (array.some(arrayElmt => arrayElmt.elementIndex === value)) {
 		return true;
 	}
@@ -18,7 +17,7 @@ function getRestList(data, map) {
 	google.maps.event.addListener(map, 'idle', function () {
 		const mapBoundaries = map.getBounds();
 		restaurantsList.forEach((element, index) => {
-			if (mapBoundaries.contains({ lat: element.lat, lng: element.long }) && (!isInArray(visibleRestaurants, index))) {
+			if (mapBoundaries.contains({ lat: element.lat, lng: element.long }) && (!isIndexInArray(visibleRestaurants, index))) {
 				// create a Restaurant object from class
 				const restaurant = new Restaurant(index, element.restaurantName, element.address, element.lat, element.long, element.ratings);
 				visibleRestaurants.push(restaurant);
@@ -62,4 +61,6 @@ function getRestList(data, map) {
 
 	filterRestaurantList();
 }
+
+
 

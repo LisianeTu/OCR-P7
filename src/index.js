@@ -35,4 +35,3 @@ fetch('./data/list.json')
 	.then(data => getRestList(data, gMap)) // use the data to display restaurants
 	.catch(err => { console.log(err)})
 
-
