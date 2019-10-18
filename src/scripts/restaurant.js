@@ -130,7 +130,7 @@ class Restaurant {
 						<div class="img-street-view">
 							<img class="w-100" src="${this.getStreetViewImage()}"
 						</div>
-						<button id="add-comment-${this.index}" class="btn" data-toggle="modal" data-target="#add-comment-modal-${this.index}" data-restaurant="${this.name}">
+						<button id="add-comment-${this.index}" class="btn" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
 							<i class="fas fa-plus-circle"></i> Ajouter un avis
 						</button>
 						<ul id="comment-list-${this.index}" class="list-group-flush p-0">
@@ -139,11 +139,10 @@ class Restaurant {
 				</div>
 			</div>`
 		);
-		document.getElementById(`add-comment-${this.index}`).addEventListener('click', () => {
+		//this.addComment();
+		/* document.getElementById(`add-comment-${this.index}`).addEventListener('click', () => {
 			this.triggerCommentModal();
-			//this.createCommentModal();
-			//this.addComment();
-		});
+		}); */
 	}
 
 	// addition of the restaurant in the list with card creation, rating calculation and conversion to stars, and comments list - no duplicate
@@ -249,38 +248,56 @@ class Restaurant {
 		</div>`)
 	} */
 
-	triggerCommentModal() {
-		// customize modal id
-		document.getElementById('add-comment-modal').id = `add-comment-modal-${this.index}`;
+	/* triggerCommentModal() {
 		
-		// change name of modal
-		$('#add-comment-modal-'+this.index).on('show.bs.modal', (event) => {
-			const button = $(event.relatedTarget); // Button that triggered the modal
-			const restaurantName = button.data('restaurant'); // Extract info from data-* attributes
-			$('#restaurant-name').text(restaurantName);
-		})
+		this.addComment();
+	} */
+
+	addComment() {
+		const postCommentForm = document.getElementById(`post-comment-${this.index}`);
+		
+		/* postCommentForm.addEventListener('submit', (e) => {
+			e.preventDefault(); */
+
+			if (!postCommentForm.checkValidity()) {				
+				e.stopPropagation();
+			} else {
+				$('#add-comment-modal').modal('toggle');
+				
+				const thisRate = parseInt(document.querySelector(`#post-comment-${this.index} #rate-select`).value);
+				const thisComment = document.querySelector(`#post-comment-${this.index} #comment-text`).value;
+				this.ratings.push({ stars: thisRate, comment: thisComment });
+
+				const commentsContainer = document.getElementById(`comment-list-${this.index}`);
+
+				this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
+
+				this.displayAvgRating();
+			}
+		/* });
+		this.resetCommentModal(); */
 	}
 
-	/* addComment() {
-		
-
-		const modalRestaurantName = document.getElementById('restaurant-name').innerText;
-		const restaurantElement = visibleRestaurants.find(el => el.name === modalRestaurantName);	
-		console.log(restaurantElement);
-		// post comment
-		document.getElementById('post-comment').id = `post-comment-${restaurantElement.index}`;
-
-		const postCommentForm = document.getElementById(`post-comment-${restaurantElement.index}`);
-
-		postCommentForm.addEventListener('submit', (e) => {
-			$('#add-comment-modal').modal('toggle');
-			e.preventDefault();
-			restaurantElement.addComment();
-		})
-
+	/* resetCommentModal() {
 		$('#add-comment-modal').on('hidden.bs.modal', () => {
-			document.querySelector('[id^="post-comment-"]').id = 'post-comment';
-			document.getElementById('post-comment').reset();
+			
+			const postCommentForm = document.querySelector('[id^="post-comment-"]');
+
+			if (postCommentForm) {
+				postCommentForm.reset();
+				postCommentForm.id = 'post-comment';
+			}
 		})
 	} */
 }
+
+
+// change name of modal
+/* $('#add-comment-modal').on('show.bs.modal', (event) => {
+	// customize form id
+	document.getElementById('post-comment').id = `post-comment-${this.index}`;
+
+	const button = $(event.relatedTarget); // Button that triggered the modal
+	const restaurantName = button.data('restaurant'); // Extract info from data-* attributes
+	$('#restaurant-name').text(restaurantName);
+}) */
