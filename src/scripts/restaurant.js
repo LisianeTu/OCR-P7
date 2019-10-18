@@ -130,18 +130,19 @@ class Restaurant {
 						<div class="img-street-view">
 							<img class="w-100" src="${this.getStreetViewImage()}"
 						</div>
-						<ul id="comment-list-${this.index}" class="list-group-flush p-0">
-						</ul>
 						<button id="add-comment-${this.index}" class="btn" data-toggle="modal" data-target="#add-comment-modal-${this.index}" data-restaurant="${this.name}">
 							<i class="fas fa-plus-circle"></i> Ajouter un avis
 						</button>
+						<ul id="comment-list-${this.index}" class="list-group-flush p-0">
+						</ul>
 					</div>
 				</div>
 			</div>`
 		);
 		document.getElementById(`add-comment-${this.index}`).addEventListener('click', () => {
-			this.createCommentModal();
-			this.addComment();
+			this.triggerCommentModal();
+			//this.createCommentModal();
+			//this.addComment();
 		});
 	}
 
@@ -195,19 +196,21 @@ class Restaurant {
 		this.marker.setMap(null);
 	}
 
+	// hide filtered restaurant
 	hide() {
 		const restaurantCard = document.getElementById(`card-${this.index}`);
 		restaurantCard.classList.add('d-none');
 		this.marker.setVisible(false);
 	}
 
+	// show filtered restaurant
 	show() {
 		const restaurantCard = document.getElementById(`card-${this.index}`);
 		restaurantCard.classList.remove('d-none');
 		this.marker.setVisible(true);
 	}
 
-	createCommentModal() {
+	/* createCommentModal() {
 		const modalContainer = document.getElementById('modal-container');
 		modalContainer.insertAdjacentHTML('afterbegin',
 			`<div class="modal fade" id="add-comment-modal-${this.index}" tabindex="-1" role="dialog" aria-labelledby="add-comment-modal"
@@ -244,34 +247,40 @@ class Restaurant {
 				</div>
 			</div>
 		</div>`)
+	} */
+
+	triggerCommentModal() {
+		// customize modal id
+		document.getElementById('add-comment-modal').id = `add-comment-modal-${this.index}`;
+		
+		// change name of modal
+		$('#add-comment-modal-'+this.index).on('show.bs.modal', (event) => {
+			const button = $(event.relatedTarget); // Button that triggered the modal
+			const restaurantName = button.data('restaurant'); // Extract info from data-* attributes
+			$('#restaurant-name').text(restaurantName);
+		})
 	}
 
-	addComment() {
-		const postCommentForm = document.getElementById(`post-comment-${this.index}`);
+	/* addComment() {
+		
+
+		const modalRestaurantName = document.getElementById('restaurant-name').innerText;
+		const restaurantElement = visibleRestaurants.find(el => el.name === modalRestaurantName);	
+		console.log(restaurantElement);
+		// post comment
+		document.getElementById('post-comment').id = `post-comment-${restaurantElement.index}`;
+
+		const postCommentForm = document.getElementById(`post-comment-${restaurantElement.index}`);
 
 		postCommentForm.addEventListener('submit', (e) => {
+			$('#add-comment-modal').modal('toggle');
 			e.preventDefault();
-
-			if (!postCommentForm.checkValidity()) {				
-				e.stopPropagation();
-			} else {
-				$(`#add-comment-modal-${this.index}`).modal('toggle');
-				const thisRate = parseInt(document.querySelector(`#post-comment-${this.index} #rate-select`).value);
-				const thisComment = document.querySelector(`#post-comment-${this.index} #comment-text`).value;
-				this.ratings.push({ stars: thisRate, comment: thisComment });
-				console.log(this.ratings);
-
-				const commentsContainer = document.getElementById(`comment-list-${this.index}`);
-
-				this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
-
-				this.displayAvgRating();
-			}
+			restaurantElement.addComment();
 		})
 
-		$(`#add-comment-modal-${this.index}`).on('hidden.bs.modal', () => {
-			postCommentForm.reset();
-			$(`#add-comment-modal-${this.index}`).remove();
+		$('#add-comment-modal').on('hidden.bs.modal', () => {
+			document.querySelector('[id^="post-comment-"]').id = 'post-comment';
+			document.getElementById('post-comment').reset();
 		})
-	}
+	} */
 }
