@@ -130,19 +130,15 @@ class Restaurant {
 						<div class="img-street-view">
 							<img class="w-100" src="${this.getStreetViewImage()}"
 						</div>
-						<button id="add-comment-${this.index}" class="btn" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
+						<button id="add-comment" class="btn mt-2" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
 							<i class="fas fa-plus-circle"></i> Ajouter un avis
 						</button>
-						<ul id="comment-list-${this.index}" class="list-group-flush p-0">
+						<ul id="comment-list-${this.index}" class="list-group-flush p-0 mt-2">
 						</ul>
 					</div>
 				</div>
 			</div>`
 		);
-		//this.addComment();
-		/* document.getElementById(`add-comment-${this.index}`).addEventListener('click', () => {
-			this.triggerCommentModal();
-		}); */
 	}
 
 	// addition of the restaurant in the list with card creation, rating calculation and conversion to stars, and comments list - no duplicate
@@ -209,95 +205,16 @@ class Restaurant {
 		this.marker.setVisible(true);
 	}
 
-	/* createCommentModal() {
-		const modalContainer = document.getElementById('modal-container');
-		modalContainer.insertAdjacentHTML('afterbegin',
-			`<div class="modal fade" id="add-comment-modal-${this.index}" tabindex="-1" role="dialog" aria-labelledby="add-comment-modal"
-			aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal-label">Ajouter un commentaire pour ${this.name}</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form id="post-comment-${this.index}" autocomplete="off">
-							<div class="form-group">
-								<label for="rate-select" class="col-form-label">Note :</label>
-								<select id="rate-select" class="form-control" required>
-									<option value="">Choisissez une note</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="comment-text" class="col-form-label">Commentaire :</label>
-								<textarea class="form-control" id="comment-text"></textarea>
-							</div>
-							<button type="submit" class="btn btn-primary">Envoyer</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>`)
-	} */
-
-	/* triggerCommentModal() {
-		
-		this.addComment();
-	} */
-
+	// post comment and update ratings
 	addComment() {
-		const postCommentForm = document.getElementById(`post-comment-${this.index}`);
-		
-		/* postCommentForm.addEventListener('submit', (e) => {
-			e.preventDefault(); */
+		const thisRate = parseInt(document.querySelector(`#rate-select`).value);
+		const thisComment = document.querySelector(`#comment-text`).value;
+		this.ratings.push({ stars: thisRate, comment: thisComment });
 
-			if (!postCommentForm.checkValidity()) {				
-				e.stopPropagation();
-			} else {
-				$('#add-comment-modal').modal('toggle');
-				
-				const thisRate = parseInt(document.querySelector(`#post-comment-${this.index} #rate-select`).value);
-				const thisComment = document.querySelector(`#post-comment-${this.index} #comment-text`).value;
-				this.ratings.push({ stars: thisRate, comment: thisComment });
+		const commentsContainer = document.getElementById(`comment-list-${this.index}`);
 
-				const commentsContainer = document.getElementById(`comment-list-${this.index}`);
+		this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
 
-				this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
-
-				this.displayAvgRating();
-			}
-		/* });
-		this.resetCommentModal(); */
+		this.displayAvgRating();
 	}
-
-	/* resetCommentModal() {
-		$('#add-comment-modal').on('hidden.bs.modal', () => {
-			
-			const postCommentForm = document.querySelector('[id^="post-comment-"]');
-
-			if (postCommentForm) {
-				postCommentForm.reset();
-				postCommentForm.id = 'post-comment';
-			}
-		})
-	} */
 }
-
-
-// change name of modal
-/* $('#add-comment-modal').on('show.bs.modal', (event) => {
-	// customize form id
-	document.getElementById('post-comment').id = `post-comment-${this.index}`;
-
-	const button = $(event.relatedTarget); // Button that triggered the modal
-	const restaurantName = button.data('restaurant'); // Extract info from data-* attributes
-	$('#restaurant-name').text(restaurantName);
-}) */

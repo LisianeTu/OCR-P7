@@ -36,10 +36,8 @@ getLocationBtn.addEventListener('click', () => {
 });
 
 
-
 // call the json containing the list of restaurant
 fetch('./data/list.json')
 	.then(response => response.json()) // transform the data into json
 	.then(data => getRestList(data, gMap)) // use the data to display restaurants
 	.catch(err => { console.log(err)})
-

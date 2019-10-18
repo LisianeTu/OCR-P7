@@ -1,5 +1,6 @@
 import { Restaurant } from './restaurant.js';
 import { minRateInput, maxRateInput } from './filters.js';
+import './comments.js';
 export { getRestList, visibleRestaurants };
 
 let visibleRestaurants = [];
@@ -10,6 +11,7 @@ function isIndexInArray(array, value) {
 	}
 }
 
+// display list of restaurants depending on map
 function getRestList(data, map) {
 	const restaurantsList = data;
 	// when the map event is triggered, for each element of the json, check if it is within the map boundaries 
@@ -63,35 +65,4 @@ function getRestList(data, map) {
 			}
 		}
 	});
-
-	$('#add-comment-modal').on('show.bs.modal', (event) => {
-		const button = $(event.relatedTarget); // Button that triggered the modal
-		const restaurantName = button.data('restaurant'); // Extract info from data-* attributes
-		$('#restaurant-name').text(restaurantName);
-
-		const modalRestaurantName = document.getElementById('restaurant-name').innerText;
-		const restaurantElement = visibleRestaurants.find(el => el.name === modalRestaurantName);	
-
-		document.getElementById('post-comment').id = `post-comment-${restaurantElement.index}`;
-		const postCommentForm = document.getElementById(`post-comment-${restaurantElement.index}`);
-	
-		postCommentForm.addEventListener('submit', (e) => {
-			$('#add-comment-modal').modal('toggle');
-			e.preventDefault();
-			restaurantElement.addComment();
-		})
-	})
-	
-	
-	
-	
-	$('#add-comment-modal').on('hidden.bs.modal', () => {
-		postCommentForm.removeEventListener('submit', (e) => {
-			$('#add-comment-modal').modal('toggle');
-			e.preventDefault();
-			restaurantElement.addComment();
-		})
-		document.querySelector('[id^="post-comment-"]').id = 'post-comment';
-		document.getElementById('post-comment').reset();
-	})
 }
