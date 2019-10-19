@@ -130,7 +130,7 @@ class Restaurant {
 						<div class="img-street-view">
 							<img class="w-100" src="${this.getStreetViewImage()}"
 						</div>
-						<button id="add-comment" class="btn mt-2" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
+						<button id="add-comment-${this.index}" class="btn mt-2" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
 							<i class="fas fa-plus-circle"></i> Ajouter un avis
 						</button>
 						<ul id="comment-list-${this.index}" class="list-group-flush p-0 mt-2">
@@ -139,6 +139,13 @@ class Restaurant {
 				</div>
 			</div>`
 		);
+		// toggle collapse when clicking anywhere in the card-body, except when clicking on the add comment button
+		document.getElementById(`collapse-${this.index}`).addEventListener('click', (e) => {
+			const buttonAddComment = document.getElementById(`add-comment-${this.index}`);
+			if (e.target !== buttonAddComment) {
+				$('#collapse-'+this.index).collapse('toggle');
+			}
+		})
 	}
 
 	// addition of the restaurant in the list with card creation, rating calculation and conversion to stars, and comments list - no duplicate
