@@ -1,11 +1,12 @@
 import { getPosition, searchPlace } from './location.js';
 import { getRestList } from './restaurantsList.js';
+import { addRestaurant } from './addRestaurant.js';
 
 import '@fortawesome/fontawesome-free/js/all';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/styles.css';
-
+import swal from 'sweetalert';
 
 // map init
 let gMap;
@@ -27,6 +28,7 @@ window.initMap = () => {
 	
 	// autocomplete address input
 	searchPlace(gMap);	
+	
 }
 
 // geoloc button action
@@ -39,5 +41,10 @@ getLocationBtn.addEventListener('click', () => {
 // call the json containing the list of restaurant
 fetch('./data/list.json')
 	.then(response => response.json()) // transform the data into json
-	.then(data => getRestList(data, gMap)) // use the data to display restaurants
-	.catch(err => { console.log(err)})
+	.then(data => {
+		getRestList(data, gMap) // use the data to display restaurants
+		addRestaurant(gMap)
+	}) 
+	.catch(err => {
+		console.log(err)
+	})

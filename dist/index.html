@@ -34,8 +34,8 @@
 
 	<section class="container-fluid">
 		<div id="options" class="row align-items-center justify-content-between">
-			<div id="add-rest" class="col-8">
-				<button class="btn">
+			<div class="col-8">
+				<button id="add-rest" class="btn">
 					<i id="add-rest-icon" class="fas fa-plus-circle"></i> Ajouter un restaurant
 				</button>
 			</div>
@@ -122,6 +122,54 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 						<button type="submit" class="btn btn-primary">Envoyer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- add restaurant modal -->
+	<div class="modal fade" id="add-restaurant-modal" tabindex="-1" role="dialog" aria-labelledby="add-restaurant-modal"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="post-restaurant" autocomplete="off">
+					<div class="modal-header">
+						<h5 class="modal-title">Ajouter un restaurant</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="input-name" class="col-form-label">Nom :</label>
+							<input id="input-name" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="input-address" class="col-form-label">Adresse :</label>
+							<input id="input-address" type="text" name="address"
+					class="form-control form-control-md" autocomplete="off" required>
+						</div>
+						<hr>
+						<div class="form-group">
+							<label for="add-rest-rate-select" class="col-form-label">Note :</label>
+							<select id="add-rest-rate-select" class="form-control">
+								<option value="">Choisissez une note</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="add-rest-comment-text" class="col-form-label">Commentaire :</label>
+							<textarea class="form-control" id="add-rest-comment-text"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						<button type="submit" class="btn btn-primary">Ajouter</button>
 					</div>
 				</form>
 			</div>

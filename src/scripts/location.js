@@ -1,4 +1,4 @@
-export { getPosition, searchPlace };
+export { getAddress, getPosition, searchPlace };
 
 let userPositionMarker, autocompleteInput;
 
@@ -15,20 +15,19 @@ function setMapOnPosition(map, position) {
 	});
 }
 
-function getAddress(posCoordinates) {
+function getAddress(posCoordinates, input) {
 	// reverse geocoding and display address in input field
 	const geocoder = new google.maps.Geocoder;
-	let inputLocation = document.getElementById('location-input');
 	geocoder.geocode({'location': posCoordinates}, (results, status) => {
 		if (status === 'OK') {
 			if (results[0]) { 
 				const address = results[0].formatted_address;
-				inputLocation.value = address;
+				input.value = address;
 			} else {
-				inputLocation.value = 'Nous ne pouvons pas retrouver votre adresse.';
+				input.value = 'Nous ne pouvons pas retrouver votre adresse.';
 			}
 		} else {
-			inputLocation.value = 'Nous ne pouvons pas retrouver votre adresse.';
+			input.value = 'Nous ne pouvons pas retrouver votre adresse.';
 		}
 	});
 }
@@ -47,11 +46,12 @@ function getPosition(map) {
 			let coordinates = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			setMapOnPosition(map, coordinates);
 			// get address from location
-			getAddress(coordinates);
+			let inputLocation = document.getElementById('location-input');
+			getAddress(coordinates, inputLocation);
 		})
 		.catch((err) => {
 			console.log(err);
-			alert('Nous ne pouvons pas vous géolocaliser');
+			swal('Nous ne pouvons pas vous géolocaliser');
 		})
 }
 
@@ -62,7 +62,7 @@ function onPlaceChanged(map) {
 		if (place.geometry) {
 			setMapOnPosition(map, place.geometry.location);
 		} else {
-			alert('Cette adresse n\'existe pas');
+			swal('Cette adresse n\'existe pas');
 			document.getElementById('location-input').value='';
 		}
 	}

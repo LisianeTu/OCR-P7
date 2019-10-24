@@ -25,6 +25,7 @@
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "nouislider": "^14.0.3",
-    "popper.js": "^1.16.0"
+    "popper.js": "^1.16.0",
+    "sweetalert": "^2.1.2"
   }
 }

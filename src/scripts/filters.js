@@ -19,7 +19,7 @@ function displayFilter() {
 	const appliedFilterMin = minRateInput.value;
 	const appliedFilterMax = maxRateInput.value;
 	
-	if (!(appliedFilterMin === '1' && appliedFilterMax === '5')) {
+	if (!(appliedFilterMin === '0' && appliedFilterMax === '5')) {
 		document.getElementById('current-filter-min').innerHTML = appliedFilterMin;	
 		document.getElementById('current-filter-max').innerHTML = appliedFilterMax;
 	
@@ -34,7 +34,7 @@ function clearFilter() {
 	currentFilter.classList.add('d-none');
 	filterForm.reset();
 	
-	maxRateInput.setAttribute('min', 1);
+	maxRateInput.setAttribute('min', 0);
 	minRateInput.setAttribute('max', 5);
 	slider.noUiSlider.reset();
 
@@ -46,10 +46,10 @@ function clearFilter() {
 // noUISlider component creation
 const slider = document.getElementById('slider');
 noUiSlider.create(slider, {
-	start: [1, 5],
+	start: [0, 5],
 	connect: true,
 	range: {
-		'min': 1,
+		'min': 0,
 		'max': 5
 	},
 	step: 1
@@ -94,7 +94,7 @@ filterForm.addEventListener('submit', (e) => {
 
 // reset form
 filterForm.addEventListener('reset', () => {
-	maxRateInput.setAttribute('min', 1);
+	maxRateInput.setAttribute('min', 0);
 	minRateInput.setAttribute('max', 5);
 	slider.noUiSlider.reset();
 })
