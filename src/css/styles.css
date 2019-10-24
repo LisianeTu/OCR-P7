@@ -64,3 +64,43 @@ body {
   width: 0;
 }
 
+/* modal styling */
+.modal .btn-secondary {
+	background-color: #efefef;
+	border: none;
+	color: #555;
+}
+
+.modal .btn-secondary:hover {
+	background-color: #e8e8e8;
+	color: #555;
+}
+
+.modal .btn-primary {
+	background-color: #f8ce0b;
+	border: none;
+	color: #fff;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.modal .btn-primary:hover {
+	background-color: #ceaa0a;
+	color: #fff;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* swal button styling */
+.swal-button--confirm {
+  background-color: #f8ce0b;
+  font-size: 12px;
+  border: 1px solid #ceaa0a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.swal-button--confirm:hover {
+	background-color: #ceaa0a;
+}
+
+.swal-button--confirm:not([disabled]):hover {
+	background-color: #ceaa0a;
+}

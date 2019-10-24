@@ -129,13 +129,13 @@ class Restaurant {
 						</div>
 					</div>
 					<div class="row">
-						<span>${this.address}</span>
+						<span class="text-left">${this.address}</span>
 					</div>
 				</div>
 				<div id="collapse-${this.id}" class="collapse" aria-labelledby="header-${this.id}" data-parent="#accordionList">
 					<div class="card-body">
 						<div class="img-street-view">
-							<img class="w-100" src="${this.getStreetViewImage()}"
+							<img class="w-100" src="${this.getStreetViewImage()}">
 						</div>
 						<button id="add-comment-${this.id}" class="btn mt-2" data-toggle="modal" data-target="#add-comment-modal" data-restaurant="${this.name}">
 							<i class="fas fa-plus-circle"></i> Ajouter un avis
@@ -251,6 +251,5 @@ class Restaurant {
 		this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
 
 		this.displayAvgRating();
-		console.log(this);
 	}
 }

@@ -75,19 +75,24 @@ function onMapClick(event, map, googleEvent) {
 
 // callback function when click event on the button is fired
 function onBtnClick(map) {
-	// display an alert to explain the process
-	swal('Veuillez cliquer sur la carte pour définir l\'emplacement de l\'établissement');
-
-	// start listening to click events on the map
-	const mapClick = google.maps.event.addListener(map, 'click', (e) => {
-		onMapClick(e, map, mapClick);
-	});
-	google.maps.event.addListener(map, 'dblclick', () => {
-		prevent = true;
+	// display an alert to explain the process - id alert is dismissed do nothing
+	swal('Veuillez cliquer sur la carte pour définir l\'emplacement de l\'établissement', {
+		buttons: ['Annuler', 'OK']
 	})
+		.then(yes => {
+			if (yes) {
+				// start listening to click events on the map
+				const mapClick = google.maps.event.addListener(map, 'click', (e) => {
+					onMapClick(e, map, mapClick);
+				});
+				google.maps.event.addListener(map, 'dblclick', () => {
+					prevent = true;
+				})
 
-	// remove the event listener to avoid events duplication
-	document.getElementById('add-rest').removeEventListener("click", onBtnClick);
+				// remove the event listener to avoid events duplication
+				document.getElementById('add-rest').removeEventListener("click", onBtnClick);
+			}
+		});
 }
 
 
@@ -112,3 +117,12 @@ $('#add-restaurant-modal').on('hidden.bs.modal', () => {
 	// remove the temporary marker
 	marker.setMap(null);
 })
+
+/* addRestaurantForm.addEventListener('reset', () => {
+	addRestaurantForm.reset();
+	addRestaurantForm.removeEventListener('submit', postRestaurant, { once: true });
+	// remove click event listener on map
+	google.maps.event.removeListener(googleEvent);
+	// remove the event listener to avoid events duplication
+	document.getElementById('add-rest').removeEventListener("click", onBtnClick);
+}) */
