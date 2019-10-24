@@ -4,7 +4,7 @@ export { Restaurant };
 class Restaurant {
 	constructor(elementIndex, name, address, lat, lng, ratings) {
 		this.elementIndex = elementIndex,
-		this.id = name.replace(/[\s|'|]+/g, '').toLowerCase(),
+		this.id = `${name.replace(/[\s|'|]+/g, '').toLowerCase()}-${this.elementIndex}`,
 		this.name = name,
 		this.address = address,
 		this.lat = lat,
@@ -251,5 +251,6 @@ class Restaurant {
 		this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
 
 		this.displayAvgRating();
+		console.log(this);
 	}
 }

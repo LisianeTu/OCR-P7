@@ -19,7 +19,7 @@ function postRestaurant(map) {
 		'long': clickCoordinates.lng(),
 		'ratings': [
 			{
-				'stars': stars,
+				'stars': parseInt(stars),
 				'comment': comment
 			}
 		]
@@ -27,9 +27,8 @@ function postRestaurant(map) {
 	if (stars === '' && comment === '') {
 		newRestaurant.ratings = [];
 	}
-
 	restaurantsList.push(newRestaurant);
-
+	
 	// display the map marker: first remove the temporary marker
 	marker.setMap(null);
 	// create an object, push it into visibleRestaurants array
