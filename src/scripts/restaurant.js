@@ -1,10 +1,18 @@
 //import { visibleRestaurants } from './restaurantsList.js';
 export { Restaurant };
 
+// transform a string to remove all accents, spaces and special characters 
+function transformName(string) {
+	let id = string.normalize("NFD");
+	id = id.replace(/([^a-zA-Z 0-9]|\s|[\u0300-\u036f])+/g, '');
+	id = id.toLowerCase();
+	return id;
+}
+
 class Restaurant {
 	constructor(elementIndex, name, address, lat, lng, ratings) {
 		this.elementIndex = elementIndex,
-		this.id = `${name.replace(/[\s|'|]+/g, '').toLowerCase()}-${this.elementIndex}`,
+		this.id = `${transformName(name)}-${this.elementIndex}`,
 		this.name = name,
 		this.address = address,
 		this.lat = lat,
@@ -123,13 +131,13 @@ class Restaurant {
 		document.getElementById('accordionList').insertAdjacentHTML('beforeend',
 			`<div id="card-${this.id}" class="card border-top-0 border-left-0 border-right-0 border-bottom rounded-0">
 			<div class="card-header btn btn-link border-0 bg-transparent text-reset text-decoration-none" class="collapse" id="header-${this.id}" data-toggle="collapse" data-target="#collapse-${this.id}">
-					<div class="row justify-content-between">
-						<div class="font-weight-bold">${this.name}</div>
-						<div id="avg-rating-${this.id}" class="ratings text-right">
+					<div class="row justify-content-between no-gutters">
+						<div class="col-8 text-left font-weight-bold">${this.name}</div>
+						<div id="avg-rating-${this.id}" class="col-4 ratings text-right">
 						</div>
 					</div>
 					<div class="row">
-						<span class="text-left">${this.address}</span>
+						<span class="col text-left">${this.address}</span>
 					</div>
 				</div>
 				<div id="collapse-${this.id}" class="collapse" aria-labelledby="header-${this.id}" data-parent="#accordionList">
