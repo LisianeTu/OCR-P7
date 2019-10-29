@@ -1,4 +1,5 @@
 import { visibleRestaurants } from './restaurantsList.js';
+import { minRateInput, maxRateInput } from './filters.js';
 
 let elementId;
 
@@ -16,6 +17,11 @@ document.getElementById('post-comment').addEventListener('submit', (e) => {
 	e.preventDefault();
 	const restaurantElement = visibleRestaurants.find(el => el.id === elementId);	
 	restaurantElement.addComment();
+
+	if (restaurantElement.averageRating < parseInt(minRateInput.value) || restaurantElement.averageRating > parseInt(maxRateInput.value)) {
+		restaurantElement.hide();
+	} 
+
 	$('#add-comment-modal').modal('toggle');
 });
 
