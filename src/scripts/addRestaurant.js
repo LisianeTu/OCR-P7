@@ -1,5 +1,5 @@
 import { getAddress } from './location.js';
-import { createAndDisplay, restaurantsList, visibleRestaurants } from './restaurantsList.js';
+import { createAndDisplay, restaurantsList } from './restaurantsList.js';
 export { addRestaurant };
 
 let thisMap, marker, clickCoordinates, prevent = false;

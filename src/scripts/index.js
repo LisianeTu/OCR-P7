@@ -13,9 +13,9 @@ let gMap;
 
 window.initMap = () => {
 	// default map centered on Paris
-	const paris = { lat: 48.8534100, lng: 2.3488000 };
+	const paris = new google.maps.LatLng({ lat: 48.8534100, lng: 2.3488000 });
 	const options = {
-		zoom: 10,
+		zoom: 15,
 		center: paris,
 		streetViewControl: false,
 		mapTypeControl: false,
@@ -23,12 +23,20 @@ window.initMap = () => {
 	}
 	gMap = new google.maps.Map(document.getElementById('map'), options);
 	
+	
 	//geolocation
 	getPosition(gMap);
 	
 	// autocomplete address input
-	searchPlace(gMap);	
+	searchPlace(gMap);
 	
+	// get the list of restaurants
+	google.maps.event.addListener(gMap, 'idle', function () {
+		getRestList(gMap);
+	})
+
+	// add a restaurant
+	addRestaurant(gMap);
 }
 
 // geoloc button action
@@ -36,15 +44,3 @@ const getLocationBtn = document.getElementById('get-location-btn');
 getLocationBtn.addEventListener('click', () => {
 	getPosition(gMap);
 });
-
-
-// call the json containing the list of restaurant
-fetch('./data/list.json')
-	.then(response => response.json()) // transform the data into json
-	.then(data => {
-		getRestList(data, gMap) // use the data to display restaurants
-		addRestaurant(gMap)
-	}) 
-	.catch(err => {
-		console.log(err)
-	})

@@ -8,11 +8,7 @@ const filterForm = document.getElementById('filter-form');
 const minRateInput = document.getElementById('min-filter-value');
 const maxRateInput = document.getElementById('max-filter-value');
 const currentFilter = document.getElementById('current-filter');
-
-// display the dropdown
-document.getElementById('dropdown-filter-btn').addEventListener('click', () => {
-	document.getElementById('dropdown-filter').style.display = 'block';
-})
+const dropDown = document.getElementById('dropdown-filter');
 
 // display the active filter
 function displayFilter() {
@@ -79,7 +75,7 @@ filterForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	
 	// hide dropdown on submit
-	document.getElementById('dropdown-filter').style.display = 'none';
+	$('#dropdown-filter-btn').dropdown('hide');
 
 	displayFilter();
 		

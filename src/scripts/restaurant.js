@@ -36,7 +36,7 @@ class Restaurant {
 			isClicked: false,
 			visible: true
 		});
-
+		
 		this.marker = newMarker;
 
 		// mouse events on markers
@@ -105,12 +105,22 @@ class Restaurant {
 	}
 
 	displayComment(container, comment, stars, index) {
-		container.insertAdjacentHTML('afterbegin',
-			`<li class="list-group-item">
-				<div id="rest-${this.id}-com-${index}" class="ratings"></div>
-				<div class="font-italic">${comment}</div>
-			</li>`
-		);
+		const commentLi = document.createElement('li');
+		commentLi.classList.add('list-group-item');
+
+		const ratingsDiv = document.createElement('div');
+		ratingsDiv.classList.add('ratings');
+		ratingsDiv.id = `rest-${this.id}-com-${index}`;
+		commentLi.appendChild(ratingsDiv);
+
+		const commentDiv = document.createElement('div');
+		commentDiv.classList.add('font-italic');
+		const commentText = document.createTextNode(`${comment}`);
+		commentDiv.appendChild(commentText);
+		commentLi.appendChild(commentDiv);
+		
+		container.appendChild(commentLi);
+		
 		const rateContainer = document.getElementById(`rest-${this.id}-com-${index}`);
 		this.convertRatingToStars(stars, rateContainer);
 	}
@@ -183,6 +193,7 @@ class Restaurant {
 
 		// display active marker when the restaurant card is shown
 		restaurantCollapsible.on('show.bs.collapse', () => {
+			restaurantCard.scrollIntoView();
 			this.activateRestaurant();
 		})
 		// reverse when restaurant card is hidden
@@ -195,7 +206,8 @@ class Restaurant {
 	mouseOverRestaurant() {
 		if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '#f2f2f2';
 		this.marker.setZIndex(1000);
-		this.marker.setOpacity(1);
+		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.id}`);
+		//this.marker.setOpacity(1);
 	}
 
 	// actions on mouse out restaurant marker or list
@@ -203,7 +215,8 @@ class Restaurant {
 		if (!this.marker.isClicked) {
 			if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '';
 			this.marker.setZIndex();
-			this.marker.setOpacity(0.8);
+			//this.marker.setOpacity(0.8);
+			this.marker.setIcon(`./images/restaurant-icon.png?i=${this.id}`);
 		}
 	}
 

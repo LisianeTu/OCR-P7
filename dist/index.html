@@ -42,7 +42,7 @@
 			<div class="col-4 text-right">
 				<div class="row no-gutters justify-content-end">
 					<div id="filter" class="col-8 dropdown">
-						<button class="btn" type="button" id="dropdown-filter-btn">
+						<button class="btn" type="button" id="dropdown-filter-btn"  data-toggle="dropdown">
 							Filtrer <i class="fas fa-chevron-down"></i>
 						</button>
 						<div id="dropdown-filter" class="dropdown-menu dropdown-menu-right">
@@ -50,13 +50,13 @@
 								<div id="slider" class="mb-3"></div>
 								<div class="row">
 									<div class="col">
-										<input type="number" min="0" max="5" class="form-control" id="min-filter-value" value="1">
+										<input type="number" min="0" max="5" class="form-control" id="min-filter-value" value="0">
 									</div>
 									<div class="col">
 										<input type="text" value="à" class="form-control-plaintext text-center" readonly>
 									</div>
 									<div class="col">
-										<input type="number" min="1" max="5" class="form-control" id="max-filter-value" value="5">
+										<input type="number" min="0" max="5" class="form-control" id="max-filter-value" value="5">
 									</div>
 								</div>
 								<div class="row row justify-content-between no-gutters">

@@ -2,6 +2,29 @@ export { getAddress, getPosition, searchPlace };
 
 let userPositionMarker, autocompleteInput;
 
+// promise get geolocation
+const getPosPromise = () => {
+	return new Promise((resolve, reject) => {
+		navigator.geolocation.getCurrentPosition(resolve, reject);
+	});
+}
+
+// get geolocation then apply on map 
+function getPosition(map) {
+	getPosPromise()
+		.then((position) => {
+			let coordinates = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			setMapOnPosition(map, coordinates);
+			// get address from location
+			let inputLocation = document.getElementById('location-input');
+			getAddress(coordinates, inputLocation);
+		})
+		.catch((err) => {
+			swal('Nous ne pouvons pas vous géolocaliser');
+			console.log(err);
+		})
+}
+
 function setMapOnPosition(map, position) {
 	if (userPositionMarker) userPositionMarker.setMap(null);
 	// change map center and zoom
@@ -32,27 +55,13 @@ function getAddress(posCoordinates, input) {
 	});
 }
 
-// promise get geolocation
-const getPosPromise = () => {
-	return new Promise((resolve, reject) => {
-		navigator.geolocation.getCurrentPosition(resolve, reject);
-	});
-}
-
-// get geolocation then apply on map 
-function getPosition(map) {
-	getPosPromise()
-		.then((position) => {
-			let coordinates = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			setMapOnPosition(map, coordinates);
-			// get address from location
-			let inputLocation = document.getElementById('location-input');
-			getAddress(coordinates, inputLocation);
-		})
-		.catch((err) => {
-			console.log(err);
-			swal('Nous ne pouvons pas vous géolocaliser');
-		})
+function searchPlace(map) {
+	const input = document.getElementById('location-input');
+	const options = {
+		componentRestrictions: {country: 'fr'}
+	};
+	autocompleteInput = new google.maps.places.Autocomplete(input, options);
+	autocompleteInput.addListener('place_changed', onPlaceChanged(map));
 }
 
 function onPlaceChanged(map) {
@@ -68,12 +77,5 @@ function onPlaceChanged(map) {
 	}
 }
 
-function searchPlace(map) {
-	const input = document.getElementById('location-input');
-	const options = {
-		componentRestrictions: {country: 'fr'}
-	};
-	autocompleteInput = new google.maps.places.Autocomplete(input, options);
-	autocompleteInput.addListener('place_changed', onPlaceChanged(map));
-}
+
 	
