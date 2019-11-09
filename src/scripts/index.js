@@ -15,14 +15,13 @@ window.initMap = () => {
 	// default map centered on Paris
 	const paris = new google.maps.LatLng({ lat: 48.8534100, lng: 2.3488000 });
 	const options = {
-		zoom: 15,
+		zoom: 16,
 		center: paris,
 		streetViewControl: false,
 		mapTypeControl: false,
 		fullscreenControl: false
 	}
 	gMap = new google.maps.Map(document.getElementById('map'), options);
-	
 	
 	//geolocation
 	getPosition(gMap);
@@ -31,10 +30,10 @@ window.initMap = () => {
 	searchPlace(gMap);
 	
 	// get the list of restaurants
-	google.maps.event.addListener(gMap, 'idle', function () {
+	google.maps.event.addListener(gMap, 'idle', () => {
 		getRestList(gMap);
 	})
-
+			
 	// add a restaurant
 	addRestaurant(gMap);
 }

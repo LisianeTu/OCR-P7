@@ -1,5 +1,13 @@
 [
 	{
+		"restaurantName": "Aux Tours de Notre Dame",
+		"address": "23 Rue d'Arcole, 75002 Paris",
+		"lat": 48.853585,
+		"long": 2.3495000000000346,
+		"ratings": [
+		]
+	},
+	{
 		"restaurantName": "Le Gibraltar",
 		"address": "61 Avenue Libert, 91210 Draveil",
 		"lat": 48.688360,
@@ -132,8 +140,8 @@
 		]
 	},
 	{
-		"restaurantName": "Bundy'Z | Restaurant Africain",
-		"address": "17 Rue Pierre Semard, 91260 Juvisy-sur-Orge",
+		"restaurantName": "Test",
+		"address": "13 Rue Pierre Semard, 91260 Juvisy-sur-Orge",
 		"lat": 48.688493,
 		"long": 2.381481,
 		"ratings": [

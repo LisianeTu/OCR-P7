@@ -1,4 +1,4 @@
-//import { visibleRestaurants } from './restaurantsList.js';
+import { service } from './restaurantsList.js';
 export { Restaurant };
 
 // transform a string to remove all accents, spaces and special characters 
@@ -10,15 +10,17 @@ function transformName(string) {
 }
 
 class Restaurant {
-	constructor(elementIndex, name, address, lat, lng, ratings) {
-		this.elementIndex = elementIndex,
-		this.id = `${transformName(name)}-${this.elementIndex}`,
+	constructor(googlePlaceId, indexInArray, name, address, lat, lng, averageRating, ratings, totalRatings) {
+		this.googlePlaceId = googlePlaceId,
+		this.indexInArray = indexInArray,
+		this.id = `${transformName(name)}-${this.indexInArray}`,
 		this.name = name,
 		this.address = address,
 		this.lat = lat,
 		this.lng = lng,
 		this.ratings = ratings,
-		this.averageRating = 0,
+		this.averageRating = averageRating,
+		this.totalRatings = totalRatings,
 		this.marker = ''
 	}
 
@@ -55,10 +57,9 @@ class Restaurant {
 		})
 	}
 
-	// convert rating to stars: get the % on 5 of the rating, math round to have .5 results, % determine the width of stars to show and add stars HTML
+	// convert rating to stars: get the % on 5 of the rating, to determine the width of stars to show and add stars HTML
 	convertRatingToStars(rate, container) {
-		const starPercentage = (rate / 5) * 100;
-		const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+		const starPercentage = ((rate / 5) * 100);
 		container.innerHTML =
 			`<div class="stars-outer">
 				<i class="far fa-star"></i>
@@ -66,7 +67,7 @@ class Restaurant {
 				<i class="far fa-star"></i>
 				<i class="far fa-star"></i>
 				<i class="far fa-star"></i>
-				<div class="stars-inner" style="width: ${starPercentageRounded}">
+				<div class="stars-inner" style="width: ${starPercentage}%">
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
@@ -76,26 +77,12 @@ class Restaurant {
 			</div>`;
 	}
 
-	// calculate the average rating from the array ratings: devide the sum of stars by the number of comments
-	calculateAvgRating() {
-		const ratings = this.ratings;
-		let averageRating = 0;
-		ratings.forEach(element => {
-			averageRating += element.stars;
-		});
-		averageRating /= ratings.length;
-		this.averageRating = averageRating;
-		return averageRating;
-	}
-
 	displayAvgRating() {
 		const avgRatingContainer = document.getElementById(`avg-rating-${this.id}`);
-		if (this.ratings.length > 0) {
-			const avgRating = this.calculateAvgRating();
-			this.convertRatingToStars(avgRating, avgRatingContainer);
-		} else {
-			this.averageRating = 0;
+		if (this.ratings.length === 0 && !this.averageRating) {
 			avgRatingContainer.innerHTML = '<div class="stars-outer">0 avis</div>';
+		} else { 
+			this.convertRatingToStars(this.averageRating, avgRatingContainer);
 		}
 	}
 
@@ -196,6 +183,33 @@ class Restaurant {
 			restaurantCard.scrollIntoView();
 			this.activateRestaurant();
 		})
+
+		restaurantCollapsible.one('show.bs.collapse', () => {
+			if (this.googlePlaceId && this.ratings.length === 0) {
+				let request = {
+					placeId: this.googlePlaceId,
+					fields: ['reviews']
+				};
+				service.getDetails(request, (placeResult, status) => {
+					if (status == google.maps.places.PlacesServiceStatus.OK) {
+						if (placeResult.reviews) {
+							const ratings = placeResult.reviews.map(review => {
+								let newReview = {};
+								return newReview = {
+									'stars': review.rating,
+									'comment': review.text
+								}
+							})
+							this.ratings = ratings;
+							this.getCommentList();
+						} 
+					} else {
+						console.log('showDetails failed: ' + status);
+					}
+				})
+			}
+		})
+
 		// reverse when restaurant card is hidden
 		restaurantCollapsible.on('hide.bs.collapse', () => {
 			this.deactivateRestaurant();
@@ -207,7 +221,6 @@ class Restaurant {
 		if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '#f2f2f2';
 		this.marker.setZIndex(1000);
 		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.id}`);
-		//this.marker.setOpacity(1);
 	}
 
 	// actions on mouse out restaurant marker or list
@@ -215,7 +228,6 @@ class Restaurant {
 		if (!this.marker.isClicked) {
 			if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '';
 			this.marker.setZIndex();
-			//this.marker.setOpacity(0.8);
 			this.marker.setIcon(`./images/restaurant-icon.png?i=${this.id}`);
 		}
 	}
@@ -244,7 +256,7 @@ class Restaurant {
 			restaurantCard.remove();
 			this.deactivateRestaurant();
 		}
-		this.marker.setMap(null);
+		if(this.marker) this.marker.setMap(null);
 	}
 
 	// hide filtered restaurant
@@ -266,11 +278,15 @@ class Restaurant {
 		const thisRate = parseInt(document.querySelector(`#rate-select`).value);
 		const thisComment = document.querySelector(`#comment-text`).value;
 		this.ratings.push({ stars: thisRate, comment: thisComment });
-
 		const commentsContainer = document.getElementById(`comment-list-${this.id}`);
-
+		this.totalRatings += 1;
 		this.displayComment(commentsContainer, thisComment, thisRate, this.ratings.length - 1);
 
-		this.displayAvgRating();
+		// update average rating - consolelog for testing
+		console.log('rating before: '+this.averageRating);
+		this.averageRating = ((this.averageRating*(this.totalRatings-1)) + thisRate )/(this.totalRatings);
+		console.log('rating after: '+this.averageRating);
+		const avgRatingContainer = document.getElementById(`avg-rating-${this.id}`);
+		this.convertRatingToStars(this.averageRating, avgRatingContainer);
 	}
 }

@@ -7,37 +7,7 @@ export { minRateInput, maxRateInput };
 const filterForm = document.getElementById('filter-form');
 const minRateInput = document.getElementById('min-filter-value');
 const maxRateInput = document.getElementById('max-filter-value');
-const currentFilter = document.getElementById('current-filter');
-const dropDown = document.getElementById('dropdown-filter');
-
-// display the active filter
-function displayFilter() {
-	const appliedFilterMin = minRateInput.value;
-	const appliedFilterMax = maxRateInput.value;
-	
-	if (!(appliedFilterMin === '0' && appliedFilterMax === '5')) {
-		document.getElementById('current-filter-min').innerHTML = appliedFilterMin;	
-		document.getElementById('current-filter-max').innerHTML = appliedFilterMax;
-	
-		currentFilter.classList.remove('d-none');
-	} else {
-		currentFilter.classList.add('d-none');
-	}
-}
-
-// reset all filters
-function clearFilter() {
-	currentFilter.classList.add('d-none');
-	filterForm.reset();
-	
-	maxRateInput.setAttribute('min', 0);
-	minRateInput.setAttribute('max', 5);
-	slider.noUiSlider.reset();
-
-	visibleRestaurants.forEach(element => {
-		element.show();
-	})
-}
+const currentFilter = document.getElementById('current-filter-container');
 
 // noUISlider component creation
 const slider = document.getElementById('slider');
@@ -88,15 +58,43 @@ filterForm.addEventListener('submit', (e) => {
 	})
 })
 
+// display the active filter
+function displayFilter() {
+	const appliedFilterMin = minRateInput.value;
+	const appliedFilterMax = maxRateInput.value;
+	
+	if (!(appliedFilterMin === '0' && appliedFilterMax === '5')) {
+		document.getElementById('current-filter-min').innerHTML = appliedFilterMin;	
+		document.getElementById('current-filter-max').innerHTML = appliedFilterMax;
+	
+		currentFilter.classList.remove('d-none');
+	} else {
+		currentFilter.classList.add('d-none');
+	}
+
+}
+
+// clear filters
+const clearBtn = document.getElementById('clear-filter');
+clearBtn.addEventListener('click', () => clearFilter());
+
+// reset all filters
+function clearFilter() {
+	currentFilter.classList.add('d-none');
+	filterForm.reset();
+	
+	maxRateInput.setAttribute('min', 0);
+	minRateInput.setAttribute('max', 5);
+	slider.noUiSlider.reset();
+
+	visibleRestaurants.forEach(element => {
+		element.show();
+	})
+}
+
 // reset form
 filterForm.addEventListener('reset', () => {
 	maxRateInput.setAttribute('min', 0);
 	minRateInput.setAttribute('max', 5);
 	slider.noUiSlider.reset();
 })
-
-// clear filters
-const clearBtn = document.getElementById('clear-filter');
-clearBtn.addEventListener('click', () => {
-	clearFilter();
-});

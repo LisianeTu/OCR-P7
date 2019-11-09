@@ -1,4 +1,4 @@
-import { visibleRestaurants } from './restaurantsList.js';
+import { restaurantsDB } from './restaurantsList.js';
 import { minRateInput, maxRateInput } from './filters.js';
 
 let elementId;
@@ -15,9 +15,9 @@ $('#add-comment-modal').on('show.bs.modal', (event) => {
 // on form submit, find the restaurant in the array of visible restaurant, post comment and close the modal
 document.getElementById('post-comment').addEventListener('submit', (e) => {
 	e.preventDefault();
-	const restaurantElement = visibleRestaurants.find(el => el.id === elementId);	
+	const restaurantElement = restaurantsDB.find(el => el.id === elementId);	
 	restaurantElement.addComment();
-
+	
 	if (restaurantElement.averageRating < parseInt(minRateInput.value) || restaurantElement.averageRating > parseInt(maxRateInput.value)) {
 		restaurantElement.hide();
 	} 

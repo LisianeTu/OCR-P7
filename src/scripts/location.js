@@ -29,7 +29,7 @@ function setMapOnPosition(map, position) {
 	if (userPositionMarker) userPositionMarker.setMap(null);
 	// change map center and zoom
 	map.panTo(position);
-	map.setZoom(15);	
+	map.setZoom(17);	
 	// add a user position marker
 	userPositionMarker = new google.maps.Marker({
 		position: position,
