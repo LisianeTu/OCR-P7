@@ -1,6 +1,6 @@
 import { getAddress } from './location.js';
 import { Restaurant } from './restaurant.js';
-import { restaurantsDB, isValueInArray, visibleRestaurants } from './restaurantsList.js';
+import { restaurantsDB, isValueInArray, visibleRestaurants, paddedBounds } from './restaurantsList.js';
 import { minRateInput, maxRateInput } from './filters.js';
 export { addRestaurant };
 
@@ -113,7 +113,7 @@ function postRestaurant(thisMap) {
 			// display the map marker: first remove the temporary marker
 			marker.setMap(null);
 			
-			if (thisMap.getBounds().contains({ lat: newRestaurant.lat, lng: newRestaurant.lng })) {
+			if (paddedBounds(thisMap, 45, 0, 16, 16).contains({ lat: newRestaurant.lat, lng: newRestaurant.lng })) {
 				visibleRestaurants.push(newRestaurant);
 				newRestaurant.displayRestaurant(thisMap);
 		

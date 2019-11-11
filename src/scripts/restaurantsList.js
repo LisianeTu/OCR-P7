@@ -1,7 +1,7 @@
 import { Restaurant } from './restaurant.js';
 import { minRateInput, maxRateInput } from './filters.js';
 import './addComments.js';
-export { getRestList, service, restaurantsDB, visibleRestaurants, isValueInArray };
+export { getRestList, service, restaurantsDB, visibleRestaurants, isValueInArray, paddedBounds };
 
 let service, restaurantsDB;
 const visibleRestaurants = [];
@@ -31,7 +31,9 @@ fetch('./data/list.json')
 function getRestList(map) {
 	// everytime the map changes, call google places api & create objects to add them to the database array
 	// replace 'from-JSON' objects if it exists in google results, don't create new objects if already existing in google results
-	const mapBoundaries = map.getBounds();
+	
+	// add padding to the map boundaries to avoid half cut markers
+	const paddedBoundaries = paddedBounds(map, 45, 0, 16, 16);
 	const mapCenter = map.getCenter();
 	
 	const searchRequest = {
@@ -68,7 +70,7 @@ function getRestList(map) {
 				if (!restaurant[key] && restaurant[key] !== 'maker') restaurant[key] = 0;
 			});
 			// if the map contains the position of the restaurant
-			if ( mapBoundaries.contains({ lat: restaurant.lat, lng: restaurant.lng }) && isValueInArray(visibleRestaurants, restaurant.name, restaurant.address) !== 'yes' && visibleRestaurants.length < 25) {
+			if ( paddedBoundaries.contains({ lat: restaurant.lat, lng: restaurant.lng }) && isValueInArray(visibleRestaurants, restaurant.name, restaurant.address) !== 'yes' && visibleRestaurants.length < 25) {
 				visibleRestaurants.push(restaurant);
 				restaurant.displayRestaurant(map);
 
@@ -76,7 +78,7 @@ function getRestList(map) {
 				if (restaurant.averageRating < parseInt(minRateInput.value) || restaurant.averageRating > parseInt(maxRateInput.value)) {
 					restaurant.hide();
 				}
-			} else if ( !mapBoundaries.contains({ lat: restaurant.lat, lng: restaurant.lng }) && isValueInArray(visibleRestaurants, restaurant.name, restaurant.address) == 'yes' ) {
+			} else if ( !paddedBoundaries.contains({ lat: restaurant.lat, lng: restaurant.lng }) && isValueInArray(visibleRestaurants, restaurant.name, restaurant.address) == 'yes' ) {
 				visibleRestaurants.splice(visibleRestaurants.indexOf(restaurant), 1);
 				restaurant.clearRestaurant(map);
 			}
@@ -98,3 +100,25 @@ function isValueInArray(array, ...values) {
 	return result;
 }
 
+// recalculate the bounds of the map to add padding to it
+function paddedBounds(map, northPad, southPad, eastPad, westPad) {
+	const mapBoundaries = map.getBounds();
+	
+	const SW = mapBoundaries.getSouthWest();
+	const NE = mapBoundaries.getNorthEast();
+
+	const topRight = map.getProjection().fromLatLngToPoint(NE);
+	const bottomLeft = map.getProjection().fromLatLngToPoint(SW);
+
+	const scale = Math.pow(2, map.getZoom());
+
+	const SWpoint = new google.maps.Point(westPad, ((bottomLeft.y - topRight.y) * scale) - southPad);
+	const SWworld = new google.maps.Point(SWpoint.x / scale + bottomLeft.x, SWpoint.y / scale + topRight.y);
+	const pt1 = map.getProjection().fromPointToLatLng(SWworld);
+
+	const NEpoint = new google.maps.Point(((topRight.x - bottomLeft.x) * scale) - eastPad, northPad);
+	const NEworld = new google.maps.Point(NEpoint.x / scale + bottomLeft.x, NEpoint.y / scale + topRight.y);
+	const pt2 = map.getProjection().fromPointToLatLng(NEworld);
+
+	return new google.maps.LatLngBounds(pt1, pt2);
+}
