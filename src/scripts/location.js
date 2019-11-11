@@ -1,3 +1,4 @@
+import UserPositionIcon from '../images/user-position.png';
 export { getAddress, getPosition, searchPlace };
 
 let userPositionMarker, autocompleteInput;
@@ -34,7 +35,7 @@ function setMapOnPosition(map, position) {
 	userPositionMarker = new google.maps.Marker({
 		position: position,
 		map: map,
-		icon: './images/user-position.png'
+		icon: UserPositionIcon
 	});
 }
 

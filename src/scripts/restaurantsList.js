@@ -7,7 +7,7 @@ let service, restaurantsDB;
 const visibleRestaurants = [];
 
 // call the json containing the list of restaurant
-fetch('./data/list.json')
+fetch('./static/data/list.json')
 	// transform the data into json
 	.then(response => response.json())
 	// create objects and add them to the database array

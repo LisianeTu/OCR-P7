@@ -1,3 +1,5 @@
+import restaurantIcon from '../images/restaurant-icon.png';
+import restaurantIconOver from '../images/restaurant-icon-over.png';
 import { service } from './restaurantsList.js';
 export { Restaurant };
 
@@ -33,7 +35,7 @@ class Restaurant {
 			position: position,
 			optimized: false,
 			map: map,
-			icon: `./images/restaurant-icon.png?i=${this.id}`,
+			icon: `${restaurantIcon}?i=${this.id}`,
 			opacity: 0.8,
 			isClicked: false,
 			visible: true
@@ -220,7 +222,7 @@ class Restaurant {
 	mouseOverRestaurant() {
 		if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '#f2f2f2';
 		this.marker.setZIndex(1000);
-		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.id}`);
+		this.marker.setIcon(`${restaurantIconOver}?i=${this.id}`);
 	}
 
 	// actions on mouse out restaurant marker or list
@@ -228,14 +230,14 @@ class Restaurant {
 		if (!this.marker.isClicked) {
 			if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '';
 			this.marker.setZIndex();
-			this.marker.setIcon(`./images/restaurant-icon.png?i=${this.id}`);
+			this.marker.setIcon(`${restaurantIcon}?i=${this.id}`);
 		}
 	}
 
 	// set parameters when restaurant is selected
 	activateRestaurant() {
 		this.marker.isClicked = true;
-		this.marker.setIcon(`./images/restaurant-icon-over.png?i=${this.id}`);
+		this.marker.setIcon(`${restaurantIconOver}?i=${this.id}`);
 		this.marker.setZIndex(100);
 		this.marker.setOpacity(1);
 	}
@@ -243,7 +245,7 @@ class Restaurant {
 	// set parameters when restaurant is deselected
 	deactivateRestaurant() {
 		this.marker.isClicked = false;
-		this.marker.setIcon(`./images/restaurant-icon.png?i=${this.id}`);
+		this.marker.setIcon(`${restaurantIcon}?i=${this.id}`);
 		this.marker.setZIndex();
 		this.marker.setOpacity(0.8);
 		if (document.getElementById(`card-${this.id}`)) document.getElementById(`card-${this.id}`).style.backgroundColor = '';

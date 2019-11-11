@@ -6,7 +6,7 @@ body {
 
 #header {
 	height: 250px;
-	background-image: url("../../dist/images/header-bg.jpg");
+	background-image: url("../images/header-bg.jpg");
 	background-color: #fff;
 	background-size: cover;
 	background-position: center center;
