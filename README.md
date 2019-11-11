@@ -1,5 +1,5 @@
 # OCR-P7
-Work in progress - Site d'avis de restaurants
+URL : https://lisianeturlure.com/p7-ouestcequonmange/
 
 Objectif : créer un service simple et utile qui permet d'avoir des avis sur des restaurants autour de soi.
 Pour ce projet, vous allez devoir apprendre à utiliser des API externes, telles que celles de Google Maps et de Google Places).
